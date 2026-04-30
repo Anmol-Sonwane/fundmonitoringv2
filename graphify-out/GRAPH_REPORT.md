@@ -1,11 +1,11 @@
 # Graph Report - fundmonitoringv2  (2026-04-30)
 
 ## Corpus Check
-- 86 files · ~1,935,195 words
+- 86 files · ~1,975,781 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 666 nodes · 753 edges · 65 communities detected
+- 667 nodes · 754 edges · 65 communities detected
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 35 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -65,7 +65,6 @@
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
 - [[_COMMUNITY_Community 54|Community 54]]
-- [[_COMMUNITY_Community 55|Community 55]]
 - [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_Community 57|Community 57]]
 - [[_COMMUNITY_Community 58|Community 58]]
@@ -75,6 +74,7 @@
 - [[_COMMUNITY_Community 62|Community 62]]
 - [[_COMMUNITY_Community 63|Community 63]]
 - [[_COMMUNITY_Community 64|Community 64]]
+- [[_COMMUNITY_Community 65|Community 65]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `YearlyCalculationService` - 15 edges
@@ -314,43 +314,43 @@ Nodes (2): fundmonitoring.CommandModel, OrganizationCommandModel
 Cohesion: 0.67
 Nodes (2): fundmonitoring.CommandModel, InformationCommandModel
 
-### Community 55 - "Community 55"
+### Community 56 - "Community 56"
 Cohesion: 1.0
 Nodes (1): Organization
 
-### Community 56 - "Community 56"
+### Community 57 - "Community 57"
 Cohesion: 1.0
 Nodes (1): Studentinformation
 
-### Community 57 - "Community 57"
+### Community 58 - "Community 58"
 Cohesion: 1.0
 Nodes (1): Monthlycalculation
 
-### Community 58 - "Community 58"
+### Community 59 - "Community 59"
 Cohesion: 1.0
 Nodes (1): Nodelentry
 
-### Community 59 - "Community 59"
+### Community 60 - "Community 60"
 Cohesion: 1.0
 Nodes (1): Studenthealth
 
-### Community 60 - "Community 60"
+### Community 61 - "Community 61"
 Cohesion: 1.0
 Nodes (1): Monthlyinfrastructure
 
-### Community 61 - "Community 61"
+### Community 62 - "Community 62"
 Cohesion: 1.0
 Nodes (1): Nodel
 
-### Community 62 - "Community 62"
+### Community 63 - "Community 63"
 Cohesion: 1.0
 Nodes (1): Information
 
-### Community 63 - "Community 63"
+### Community 64 - "Community 64"
 Cohesion: 1.0
 Nodes (1): Yearlycalculation
 
-### Community 64 - "Community 64"
+### Community 65 - "Community 65"
 Cohesion: 1.0
 Nodes (1): Login
 
@@ -429,25 +429,25 @@ Nodes (1): Login
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 54`** (3 nodes): `InformationCommandModel.cs`, `fundmonitoring.CommandModel`, `InformationCommandModel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 55`** (2 nodes): `Organization.cs`, `Organization`
+- **Thin community `Community 56`** (2 nodes): `Organization.cs`, `Organization`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 56`** (2 nodes): `Studentinformation.cs`, `Studentinformation`
+- **Thin community `Community 57`** (2 nodes): `Studentinformation.cs`, `Studentinformation`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 57`** (2 nodes): `Monthlycalculation.cs`, `Monthlycalculation`
+- **Thin community `Community 58`** (2 nodes): `Monthlycalculation.cs`, `Monthlycalculation`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 58`** (2 nodes): `Nodelentry.cs`, `Nodelentry`
+- **Thin community `Community 59`** (2 nodes): `Nodelentry.cs`, `Nodelentry`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 59`** (2 nodes): `Studenthealth.cs`, `Studenthealth`
+- **Thin community `Community 60`** (2 nodes): `Studenthealth.cs`, `Studenthealth`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 60`** (2 nodes): `Monthlyinfrastructure.cs`, `Monthlyinfrastructure`
+- **Thin community `Community 61`** (2 nodes): `Monthlyinfrastructure.cs`, `Monthlyinfrastructure`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 61`** (2 nodes): `Nodel.cs`, `Nodel`
+- **Thin community `Community 62`** (2 nodes): `Nodel.cs`, `Nodel`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 62`** (2 nodes): `Information.cs`, `Information`
+- **Thin community `Community 63`** (2 nodes): `Information.cs`, `Information`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 63`** (2 nodes): `Yearlycalculation.cs`, `Yearlycalculation`
+- **Thin community `Community 64`** (2 nodes): `Yearlycalculation.cs`, `Yearlycalculation`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 64`** (2 nodes): `Login.cs`, `Login`
+- **Thin community `Community 65`** (2 nodes): `Login.cs`, `Login`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions

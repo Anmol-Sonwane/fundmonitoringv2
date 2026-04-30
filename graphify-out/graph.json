@@ -1557,7 +1557,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Organization.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_organization_cs",
-      "community": 55,
+      "community": 56,
       "norm_label": "organization.cs"
     },
     {
@@ -1566,7 +1566,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Organization.cs",
       "source_location": "L6",
       "id": "organization_organization",
-      "community": 55,
+      "community": 56,
       "norm_label": "organization"
     },
     {
@@ -1575,7 +1575,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Studentinformation.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_studentinformation_cs",
-      "community": 56,
+      "community": 57,
       "norm_label": "studentinformation.cs"
     },
     {
@@ -1584,7 +1584,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Studentinformation.cs",
       "source_location": "L6",
       "id": "studentinformation_studentinformation",
-      "community": 56,
+      "community": 57,
       "norm_label": "studentinformation"
     },
     {
@@ -1593,7 +1593,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Monthlycalculation.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_monthlycalculation_cs",
-      "community": 57,
+      "community": 58,
       "norm_label": "monthlycalculation.cs"
     },
     {
@@ -1602,7 +1602,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Monthlycalculation.cs",
       "source_location": "L6",
       "id": "monthlycalculation_monthlycalculation",
-      "community": 57,
+      "community": 58,
       "norm_label": "monthlycalculation"
     },
     {
@@ -1611,7 +1611,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Nodelentry.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_nodelentry_cs",
-      "community": 58,
+      "community": 59,
       "norm_label": "nodelentry.cs"
     },
     {
@@ -1620,7 +1620,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Nodelentry.cs",
       "source_location": "L6",
       "id": "nodelentry_nodelentry",
-      "community": 58,
+      "community": 59,
       "norm_label": "nodelentry"
     },
     {
@@ -1629,7 +1629,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Studenthealth.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_studenthealth_cs",
-      "community": 59,
+      "community": 60,
       "norm_label": "studenthealth.cs"
     },
     {
@@ -1638,7 +1638,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Studenthealth.cs",
       "source_location": "L6",
       "id": "studenthealth_studenthealth",
-      "community": 59,
+      "community": 60,
       "norm_label": "studenthealth"
     },
     {
@@ -1647,7 +1647,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Monthlyinfrastructure.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_monthlyinfrastructure_cs",
-      "community": 60,
+      "community": 61,
       "norm_label": "monthlyinfrastructure.cs"
     },
     {
@@ -1656,7 +1656,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Monthlyinfrastructure.cs",
       "source_location": "L6",
       "id": "monthlyinfrastructure_monthlyinfrastructure",
-      "community": 60,
+      "community": 61,
       "norm_label": "monthlyinfrastructure"
     },
     {
@@ -1665,7 +1665,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Nodel.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_nodel_cs",
-      "community": 61,
+      "community": 62,
       "norm_label": "nodel.cs"
     },
     {
@@ -1674,7 +1674,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Nodel.cs",
       "source_location": "L11",
       "id": "nodel_nodel",
-      "community": 61,
+      "community": 62,
       "norm_label": "nodel"
     },
     {
@@ -1683,7 +1683,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Information.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_information_cs",
-      "community": 62,
+      "community": 63,
       "norm_label": "information.cs"
     },
     {
@@ -1692,7 +1692,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Information.cs",
       "source_location": "L6",
       "id": "information_information",
-      "community": 62,
+      "community": 63,
       "norm_label": "information"
     },
     {
@@ -1701,7 +1701,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Yearlycalculation.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_yearlycalculation_cs",
-      "community": 63,
+      "community": 64,
       "norm_label": "yearlycalculation.cs"
     },
     {
@@ -1710,7 +1710,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Yearlycalculation.cs",
       "source_location": "L6",
       "id": "yearlycalculation_yearlycalculation",
-      "community": 63,
+      "community": 64,
       "norm_label": "yearlycalculation"
     },
     {
@@ -1719,7 +1719,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Login.cs",
       "source_location": "L1",
       "id": "fundmonitoring_fundmonitoring_models_login_cs",
-      "community": 64,
+      "community": 65,
       "norm_label": "login.cs"
     },
     {
@@ -1728,7 +1728,7 @@
       "source_file": "fundmonitoring/fundmonitoring/Models/Login.cs",
       "source_location": "L6",
       "id": "login_login",
-      "community": 64,
+      "community": 65,
       "norm_label": "login"
     },
     {
@@ -4356,16 +4356,25 @@
       "source_file": "AI/headcount-api/app.py",
       "source_location": "L1",
       "id": "ai_headcount_api_app_py",
-      "community": 65,
+      "community": 55,
       "norm_label": "app.py"
+    },
+    {
+      "label": "health()",
+      "file_type": "code",
+      "source_file": "AI/headcount-api/app.py",
+      "source_location": "L11",
+      "id": "app_health",
+      "community": 55,
+      "norm_label": "health()"
     },
     {
       "label": "count_people()",
       "file_type": "code",
       "source_file": "AI/headcount-api/app.py",
-      "source_location": "L11",
+      "source_location": "L15",
       "id": "app_count_people",
-      "community": 65,
+      "community": 55,
       "norm_label": "count_people()"
     },
     {
@@ -8298,8 +8307,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/CalculationController.cs",
       "source_location": "L28",
       "weight": 1.0,
-      "_src": "calculationcontroller_calculationcontroller_gettotalsummary",
-      "_tgt": "calculationservice_calculationservice_getcombinedtotal",
+      "_src": "calculationservice_calculationservice_getcombinedtotal",
+      "_tgt": "calculationcontroller_calculationcontroller_gettotalsummary",
       "source": "calculationservice_calculationservice_getcombinedtotal",
       "target": "calculationcontroller_calculationcontroller_gettotalsummary"
     },
@@ -9030,8 +9039,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/MonthlycalculationController.cs",
       "source_location": "L199",
       "weight": 1.0,
-      "_src": "monthlycalculationcontroller_monthlycalculationcontroller_getorganizationsbytype",
-      "_tgt": "yearlycalculationservice_yearlycalculationservice_getorganizationsbytypeasync",
+      "_src": "yearlycalculationservice_yearlycalculationservice_getorganizationsbytypeasync",
+      "_tgt": "monthlycalculationcontroller_monthlycalculationcontroller_getorganizationsbytype",
       "source": "yearlycalculationservice_yearlycalculationservice_getorganizationsbytypeasync",
       "target": "monthlycalculationcontroller_monthlycalculationcontroller_getorganizationsbytype"
     },
@@ -9042,8 +9051,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/YearlycalculationController.cs",
       "source_location": "L140",
       "weight": 1.0,
-      "_src": "yearlycalculationcontroller_yearlycalculationcontroller_getorganizationsbytype",
-      "_tgt": "yearlycalculationservice_yearlycalculationservice_getorganizationsbytypeasync",
+      "_src": "yearlycalculationservice_yearlycalculationservice_getorganizationsbytypeasync",
+      "_tgt": "yearlycalculationcontroller_yearlycalculationcontroller_getorganizationsbytype",
       "source": "yearlycalculationservice_yearlycalculationservice_getorganizationsbytypeasync",
       "target": "yearlycalculationcontroller_yearlycalculationcontroller_getorganizationsbytype"
     },
@@ -9054,8 +9063,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/MonthlycalculationController.cs",
       "source_location": "L209",
       "weight": 1.0,
-      "_src": "monthlycalculationcontroller_monthlycalculationcontroller_getallbyorganizationname",
-      "_tgt": "yearlycalculationservice_yearlycalculationservice_getallbyorganizationnameasync",
+      "_src": "yearlycalculationservice_yearlycalculationservice_getallbyorganizationnameasync",
+      "_tgt": "monthlycalculationcontroller_monthlycalculationcontroller_getallbyorganizationname",
       "source": "yearlycalculationservice_yearlycalculationservice_getallbyorganizationnameasync",
       "target": "monthlycalculationcontroller_monthlycalculationcontroller_getallbyorganizationname"
     },
@@ -9066,8 +9075,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/YearlycalculationController.cs",
       "source_location": "L150",
       "weight": 1.0,
-      "_src": "yearlycalculationcontroller_yearlycalculationcontroller_getallbyorganizationname",
-      "_tgt": "yearlycalculationservice_yearlycalculationservice_getallbyorganizationnameasync",
+      "_src": "yearlycalculationservice_yearlycalculationservice_getallbyorganizationnameasync",
+      "_tgt": "yearlycalculationcontroller_yearlycalculationcontroller_getallbyorganizationname",
       "source": "yearlycalculationservice_yearlycalculationservice_getallbyorganizationnameasync",
       "target": "yearlycalculationcontroller_yearlycalculationcontroller_getallbyorganizationname"
     },
@@ -9402,8 +9411,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/HeadcountController.cs",
       "source_location": "L21",
       "weight": 1.0,
-      "_src": "headcountcontroller_headcountcontroller_detect",
-      "_tgt": "headcountdetectorservice_headcountdetectorservice_detectasync",
+      "_src": "headcountdetectorservice_headcountdetectorservice_detectasync",
+      "_tgt": "headcountcontroller_headcountcontroller_detect",
       "source": "headcountdetectorservice_headcountdetectorservice_detectasync",
       "target": "headcountcontroller_headcountcontroller_detect"
     },
@@ -9582,8 +9591,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/NodelController.cs",
       "source_location": "L88",
       "weight": 1.0,
-      "_src": "nodelcontroller_nodelcontroller_gethostelbynodel",
-      "_tgt": "nodelservice_nodelservice_gethostelnamebynodelname",
+      "_src": "nodelservice_nodelservice_gethostelnamebynodelname",
+      "_tgt": "nodelcontroller_nodelcontroller_gethostelbynodel",
       "source": "nodelservice_nodelservice_gethostelnamebynodelname",
       "target": "nodelcontroller_nodelcontroller_gethostelbynodel"
     },
@@ -9594,8 +9603,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/NodelController.cs",
       "source_location": "L98",
       "weight": 1.0,
-      "_src": "nodelcontroller_nodelcontroller_getblockseat",
-      "_tgt": "nodelservice_nodelservice_getblockseatbyhostel",
+      "_src": "nodelservice_nodelservice_getblockseatbyhostel",
+      "_tgt": "nodelcontroller_nodelcontroller_getblockseat",
       "source": "nodelservice_nodelservice_getblockseatbyhostel",
       "target": "nodelcontroller_nodelcontroller_getblockseat"
     },
@@ -9606,8 +9615,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/NodelController.cs",
       "source_location": "L115",
       "weight": 1.0,
-      "_src": "nodelcontroller_nodelcontroller_gettotalhostelcount",
-      "_tgt": "nodelservice_nodelservice_gettotaluniquehostels",
+      "_src": "nodelservice_nodelservice_gettotaluniquehostels",
+      "_tgt": "nodelcontroller_nodelcontroller_gettotalhostelcount",
       "source": "nodelservice_nodelservice_gettotaluniquehostels",
       "target": "nodelcontroller_nodelcontroller_gettotalhostelcount"
     },
@@ -9762,8 +9771,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L22",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_getall",
-      "_tgt": "informationservice_informationservice_getallasync",
+      "_src": "informationservice_informationservice_getallasync",
+      "_tgt": "informationcontroller_informationcontroller_getall",
       "source": "informationservice_informationservice_getallasync",
       "target": "informationcontroller_informationcontroller_getall"
     },
@@ -9774,8 +9783,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L36",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_getbyid",
-      "_tgt": "informationservice_informationservice_getbyidasync",
+      "_src": "informationservice_informationservice_getbyidasync",
+      "_tgt": "informationcontroller_informationcontroller_getbyid",
       "source": "informationservice_informationservice_getbyidasync",
       "target": "informationcontroller_informationcontroller_getbyid"
     },
@@ -9798,8 +9807,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L51",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_add",
-      "_tgt": "informationservice_informationservice_addasync",
+      "_src": "informationservice_informationservice_addasync",
+      "_tgt": "informationcontroller_informationcontroller_add",
       "source": "informationservice_informationservice_addasync",
       "target": "informationcontroller_informationcontroller_add"
     },
@@ -9810,8 +9819,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L68",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_update",
-      "_tgt": "informationservice_informationservice_updateasync",
+      "_src": "informationservice_informationservice_updateasync",
+      "_tgt": "informationcontroller_informationcontroller_update",
       "source": "informationservice_informationservice_updateasync",
       "target": "informationcontroller_informationcontroller_update"
     },
@@ -9822,8 +9831,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L85",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_delete",
-      "_tgt": "informationservice_informationservice_deleteasync",
+      "_src": "informationservice_informationservice_deleteasync",
+      "_tgt": "informationcontroller_informationcontroller_delete",
       "source": "informationservice_informationservice_deleteasync",
       "target": "informationcontroller_informationcontroller_delete"
     },
@@ -9846,8 +9855,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L104",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_importexcel",
-      "_tgt": "informationservice_informationservice_importfromexcelasync",
+      "_src": "informationservice_informationservice_importfromexcelasync",
+      "_tgt": "informationcontroller_informationcontroller_importexcel",
       "source": "informationservice_informationservice_importfromexcelasync",
       "target": "informationcontroller_informationcontroller_importexcel"
     },
@@ -9858,8 +9867,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L118",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_getorganizationdropdown",
-      "_tgt": "informationservice_informationservice_getorganizationdropdownasync",
+      "_src": "informationservice_informationservice_getorganizationdropdownasync",
+      "_tgt": "informationcontroller_informationcontroller_getorganizationdropdown",
       "source": "informationservice_informationservice_getorganizationdropdownasync",
       "target": "informationcontroller_informationcontroller_getorganizationdropdown"
     },
@@ -9870,8 +9879,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/InformationController.cs",
       "source_location": "L132",
       "weight": 1.0,
-      "_src": "informationcontroller_informationcontroller_getbyorganization",
-      "_tgt": "informationservice_informationservice_getbyorganizationasync",
+      "_src": "informationservice_informationservice_getbyorganizationasync",
+      "_tgt": "informationcontroller_informationcontroller_getbyorganization",
       "source": "informationservice_informationservice_getbyorganizationasync",
       "target": "informationcontroller_informationcontroller_getbyorganization"
     },
@@ -10170,8 +10179,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/StudentinformationController.cs",
       "source_location": "L186",
       "weight": 1.0,
-      "_src": "studentinformationcontroller_studentinformationcontroller_getcount",
-      "_tgt": "studentinformationservice_studentinformationservice_getstudentcount",
+      "_src": "studentinformationservice_studentinformationservice_getstudentcount",
+      "_tgt": "studentinformationcontroller_studentinformationcontroller_getcount",
       "source": "studentinformationservice_studentinformationservice_getstudentcount",
       "target": "studentinformationcontroller_studentinformationcontroller_getcount"
     },
@@ -10314,8 +10323,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/NodelController.cs",
       "source_location": "L108",
       "weight": 1.0,
-      "_src": "nodelcontroller_nodelcontroller_importexcel",
-      "_tgt": "organizationservice_organizationservice_importfromexcel",
+      "_src": "organizationservice_organizationservice_importfromexcel",
+      "_tgt": "nodelcontroller_nodelcontroller_importexcel",
       "source": "organizationservice_organizationservice_importfromexcel",
       "target": "nodelcontroller_nodelcontroller_importexcel"
     },
@@ -10326,8 +10335,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/OrganizationController.cs",
       "source_location": "L83",
       "weight": 1.0,
-      "_src": "organizationcontroller_organizationcontroller_importexcel",
-      "_tgt": "organizationservice_organizationservice_importfromexcel",
+      "_src": "organizationservice_organizationservice_importfromexcel",
+      "_tgt": "organizationcontroller_organizationcontroller_importexcel",
       "source": "organizationservice_organizationservice_importfromexcel",
       "target": "organizationcontroller_organizationcontroller_importexcel"
     },
@@ -10338,8 +10347,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/OrganizationController.cs",
       "source_location": "L98",
       "weight": 1.0,
-      "_src": "organizationcontroller_organizationcontroller_getorganizationtypeswithmonth",
-      "_tgt": "organizationservice_organizationservice_getorganizationtypeswithmonthasync",
+      "_src": "organizationservice_organizationservice_getorganizationtypeswithmonthasync",
+      "_tgt": "organizationcontroller_organizationcontroller_getorganizationtypeswithmonth",
       "source": "organizationservice_organizationservice_getorganizationtypeswithmonthasync",
       "target": "organizationcontroller_organizationcontroller_getorganizationtypeswithmonth"
     },
@@ -10350,8 +10359,8 @@
       "source_file": "fundmonitoring/fundmonitoring/Controllers/OrganizationController.cs",
       "source_location": "L105",
       "weight": 1.0,
-      "_src": "organizationcontroller_organizationcontroller_getorganizationtypeswithyear",
-      "_tgt": "organizationservice_organizationservice_getorganizationtypeswithyearasync",
+      "_src": "organizationservice_organizationservice_getorganizationtypeswithyearasync",
+      "_tgt": "organizationcontroller_organizationcontroller_getorganizationtypeswithyear",
       "source": "organizationservice_organizationservice_getorganizationtypeswithyearasync",
       "target": "organizationcontroller_organizationcontroller_getorganizationtypeswithyear"
     },
@@ -11812,6 +11821,18 @@
       "confidence": "EXTRACTED",
       "source_file": "AI/headcount-api/app.py",
       "source_location": "L11",
+      "weight": 1.0,
+      "_src": "ai_headcount_api_app_py",
+      "_tgt": "app_health",
+      "source": "ai_headcount_api_app_py",
+      "target": "app_health",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "AI/headcount-api/app.py",
+      "source_location": "L15",
       "weight": 1.0,
       "_src": "ai_headcount_api_app_py",
       "_tgt": "app_count_people",
