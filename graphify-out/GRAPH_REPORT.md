@@ -1,7 +1,7 @@
 # Graph Report - fundmonitoringv2  (2026-04-30)
 
 ## Corpus Check
-- 86 files · ~1,975,781 words
+- 86 files · ~1,975,833 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

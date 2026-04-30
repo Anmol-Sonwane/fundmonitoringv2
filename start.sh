@@ -6,12 +6,18 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AI_DIR="$ROOT_DIR/AI/headcount-api"
 API_DIR="$ROOT_DIR/fundmonitoring/fundmonitoring"
 FRONTEND_DIR="$ROOT_DIR/monitoringportal"
+SEED_SQL_FILE="$ROOT_DIR/fundmonitoringnew_backup.sql"
 
 AI_HOST="${AI_HOST:-127.0.0.1}"
 AI_PORT="${AI_PORT:-5050}"
 API_URLS="${API_URLS:-http://127.0.0.1:8080}"
 FRONTEND_HOST="${FRONTEND_HOST:-127.0.0.1}"
 FRONTEND_PORT="${FRONTEND_PORT:-3002}"
+DB_HOST="${DB_HOST:-127.0.0.1}"
+DB_PORT="${DB_PORT:-3306}"
+DB_NAME="${DB_NAME:-fundmonitoringnew}"
+DB_USER="${DB_USER:-root}"
+DB_PASSWORD="${DB_PASSWORD:-Anmol28*}"
 
 PIDS=()
 
@@ -31,6 +37,50 @@ require_cmd() {
   fi
 }
 
+seed_database_if_needed() {
+  if [ ! -f "$SEED_SQL_FILE" ]; then
+    warn "Seed file not found: $SEED_SQL_FILE (skipping DB seed)"
+    return
+  fi
+
+  if ! command -v mysql >/dev/null 2>&1; then
+    warn "mysql client not found. Install MySQL client to enable auto-seeding."
+    return
+  fi
+
+  local mysql_base_cmd=(
+    mysql
+    --host="$DB_HOST"
+    --port="$DB_PORT"
+    --user="$DB_USER"
+    --password="$DB_PASSWORD"
+    --protocol=tcp
+    --batch
+    --skip-column-names
+  )
+
+  log "Checking database status for $DB_NAME ..."
+
+  if ! "${mysql_base_cmd[@]}" -e "SELECT 1;" >/dev/null 2>&1; then
+    warn "Cannot connect to MySQL at $DB_HOST:$DB_PORT as $DB_USER. Skipping DB seed."
+    return
+  fi
+
+  "${mysql_base_cmd[@]}" -e "CREATE DATABASE IF NOT EXISTS \`$DB_NAME\`;" >/dev/null
+
+  local table_count
+  table_count="$("${mysql_base_cmd[@]}" -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='$DB_NAME';")"
+
+  if [ "${table_count:-0}" -gt 0 ]; then
+    log "Database '$DB_NAME' already has tables ($table_count). Skipping seed."
+    return
+  fi
+
+  log "Database '$DB_NAME' is empty. Importing seed from $SEED_SQL_FILE ..."
+  "${mysql_base_cmd[@]}" "$DB_NAME" < "$SEED_SQL_FILE"
+  log "Seed import completed."
+}
+
 cleanup() {
   log "Stopping local services..."
   for pid in "${PIDS[@]:-}"; do
@@ -45,6 +95,8 @@ trap cleanup EXIT INT TERM
 log "Checking required tools..."
 require_cmd python3
 require_cmd dotnet
+
+seed_database_if_needed
 
 if [ ! -d "$AI_DIR" ]; then
   printf '[start.sh][error] AI service folder not found: %s\n' "$AI_DIR" >&2
@@ -109,8 +161,10 @@ Local development is running:
 
 Notes:
 - Database is NOT started by this script.
-- Make sure your local MySQL is running and matches:
-  $API_DIR/appsettings.json
+- Script seeds DB only when empty using:
+  $SEED_SQL_FILE
+- Make sure local MySQL is running and credentials are correct:
+  DB_HOST=$DB_HOST DB_PORT=$DB_PORT DB_NAME=$DB_NAME DB_USER=$DB_USER
 
 Press Ctrl+C to stop everything.
 EOF
