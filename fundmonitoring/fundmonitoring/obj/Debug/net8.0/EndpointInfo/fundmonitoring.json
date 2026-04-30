@@ -1,0 +1,3913 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "fundmonitoring",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Calculation/total-summary": {
+      "get": {
+        "tags": [
+          "Calculation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Headcount": {
+      "post": {
+        "tags": [
+          "Headcount"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "image": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Information": {
+      "get": {
+        "tags": [
+          "Information"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Information"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Information/{id}": {
+      "get": {
+        "tags": [
+          "Information"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Information"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InformationCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Information"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Information/ImportExcel": {
+      "post": {
+        "tags": [
+          "Information"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Information/OrganizationDropdown": {
+      "get": {
+        "tags": [
+          "Information"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Information/organization": {
+      "get": {
+        "tags": [
+          "Information"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Information/organization-names/by-type/{organizationType}": {
+      "get": {
+        "tags": [
+          "Information"
+        ],
+        "parameters": [
+          {
+            "name": "organizationType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login/getall": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login/add": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login/update/{id}": {
+      "put": {
+        "tags": [
+          "Login"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login/delete/{id}": {
+      "delete": {
+        "tags": [
+          "Login"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/Add": {
+      "post": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MonSno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationType": {
+                    "type": "string"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "AdmittedSeat": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Month": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "string"
+                  },
+                  "Amount": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Total": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo3": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo4": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo5": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo6": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo7": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo8": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo9": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo10": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "Remark3": {
+                    "type": "string"
+                  },
+                  "Remark4": {
+                    "type": "string"
+                  },
+                  "Remark5": {
+                    "type": "string"
+                  },
+                  "Remark6": {
+                    "type": "string"
+                  },
+                  "Remark7": {
+                    "type": "string"
+                  },
+                  "Remark8": {
+                    "type": "string"
+                  },
+                  "Remark9": {
+                    "type": "string"
+                  },
+                  "Remark10": {
+                    "type": "string"
+                  },
+                  "HeadCount1": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount2": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount3": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount4": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount5": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount6": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount7": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount8": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount9": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount10": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "encoding": {
+                "MonSno": {
+                  "style": "form"
+                },
+                "OrganizationType": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "AdmittedSeat": {
+                  "style": "form"
+                },
+                "Month": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Amount": {
+                  "style": "form"
+                },
+                "Total": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Photo3": {
+                  "style": "form"
+                },
+                "Photo4": {
+                  "style": "form"
+                },
+                "Photo5": {
+                  "style": "form"
+                },
+                "Photo6": {
+                  "style": "form"
+                },
+                "Photo7": {
+                  "style": "form"
+                },
+                "Photo8": {
+                  "style": "form"
+                },
+                "Photo9": {
+                  "style": "form"
+                },
+                "Photo10": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "Remark3": {
+                  "style": "form"
+                },
+                "Remark4": {
+                  "style": "form"
+                },
+                "Remark5": {
+                  "style": "form"
+                },
+                "Remark6": {
+                  "style": "form"
+                },
+                "Remark7": {
+                  "style": "form"
+                },
+                "Remark8": {
+                  "style": "form"
+                },
+                "Remark9": {
+                  "style": "form"
+                },
+                "Remark10": {
+                  "style": "form"
+                },
+                "HeadCount1": {
+                  "style": "form"
+                },
+                "HeadCount2": {
+                  "style": "form"
+                },
+                "HeadCount3": {
+                  "style": "form"
+                },
+                "HeadCount4": {
+                  "style": "form"
+                },
+                "HeadCount5": {
+                  "style": "form"
+                },
+                "HeadCount6": {
+                  "style": "form"
+                },
+                "HeadCount7": {
+                  "style": "form"
+                },
+                "HeadCount8": {
+                  "style": "form"
+                },
+                "HeadCount9": {
+                  "style": "form"
+                },
+                "HeadCount10": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/Update": {
+      "put": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MonSno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationType": {
+                    "type": "string"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "AdmittedSeat": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Month": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "string"
+                  },
+                  "Amount": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Total": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo3": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo4": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo5": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo6": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo7": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo8": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo9": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo10": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "Remark3": {
+                    "type": "string"
+                  },
+                  "Remark4": {
+                    "type": "string"
+                  },
+                  "Remark5": {
+                    "type": "string"
+                  },
+                  "Remark6": {
+                    "type": "string"
+                  },
+                  "Remark7": {
+                    "type": "string"
+                  },
+                  "Remark8": {
+                    "type": "string"
+                  },
+                  "Remark9": {
+                    "type": "string"
+                  },
+                  "Remark10": {
+                    "type": "string"
+                  },
+                  "HeadCount1": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount2": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount3": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount4": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount5": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount6": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount7": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount8": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount9": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount10": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "encoding": {
+                "MonSno": {
+                  "style": "form"
+                },
+                "OrganizationType": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "AdmittedSeat": {
+                  "style": "form"
+                },
+                "Month": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Amount": {
+                  "style": "form"
+                },
+                "Total": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Photo3": {
+                  "style": "form"
+                },
+                "Photo4": {
+                  "style": "form"
+                },
+                "Photo5": {
+                  "style": "form"
+                },
+                "Photo6": {
+                  "style": "form"
+                },
+                "Photo7": {
+                  "style": "form"
+                },
+                "Photo8": {
+                  "style": "form"
+                },
+                "Photo9": {
+                  "style": "form"
+                },
+                "Photo10": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "Remark3": {
+                  "style": "form"
+                },
+                "Remark4": {
+                  "style": "form"
+                },
+                "Remark5": {
+                  "style": "form"
+                },
+                "Remark6": {
+                  "style": "form"
+                },
+                "Remark7": {
+                  "style": "form"
+                },
+                "Remark8": {
+                  "style": "form"
+                },
+                "Remark9": {
+                  "style": "form"
+                },
+                "Remark10": {
+                  "style": "form"
+                },
+                "HeadCount1": {
+                  "style": "form"
+                },
+                "HeadCount2": {
+                  "style": "form"
+                },
+                "HeadCount3": {
+                  "style": "form"
+                },
+                "HeadCount4": {
+                  "style": "form"
+                },
+                "HeadCount5": {
+                  "style": "form"
+                },
+                "HeadCount6": {
+                  "style": "form"
+                },
+                "HeadCount7": {
+                  "style": "form"
+                },
+                "HeadCount8": {
+                  "style": "form"
+                },
+                "HeadCount9": {
+                  "style": "form"
+                },
+                "HeadCount10": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/Delete/{monSno}": {
+      "delete": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "monSno",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/{monSno}": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "monSno",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/GetAll": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/GetTotalByOrganizationType": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/GetTotalByOrganizationTypeMY": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sno",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/GetTotalByOrganizationName": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/GetTotalByOrganizationNameMY": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sno",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/GetOrganizationsByType": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "orgType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyCalculation/GetAllByOrganizationName": {
+      "get": {
+        "tags": [
+          "MonthlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "organizationName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/add": {
+      "post": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Misno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationType": {
+                    "type": "string"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "Month": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "string"
+                  },
+                  "Total": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo3": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo4": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo5": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo6": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo7": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo8": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo9": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo10": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "Remark3": {
+                    "type": "string"
+                  },
+                  "Remark4": {
+                    "type": "string"
+                  },
+                  "Remark5": {
+                    "type": "string"
+                  },
+                  "Remark6": {
+                    "type": "string"
+                  },
+                  "Remark7": {
+                    "type": "string"
+                  },
+                  "Remark8": {
+                    "type": "string"
+                  },
+                  "Remark9": {
+                    "type": "string"
+                  },
+                  "Remark10": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Misno": {
+                  "style": "form"
+                },
+                "OrganizationType": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "Month": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Total": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Photo3": {
+                  "style": "form"
+                },
+                "Photo4": {
+                  "style": "form"
+                },
+                "Photo5": {
+                  "style": "form"
+                },
+                "Photo6": {
+                  "style": "form"
+                },
+                "Photo7": {
+                  "style": "form"
+                },
+                "Photo8": {
+                  "style": "form"
+                },
+                "Photo9": {
+                  "style": "form"
+                },
+                "Photo10": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "Remark3": {
+                  "style": "form"
+                },
+                "Remark4": {
+                  "style": "form"
+                },
+                "Remark5": {
+                  "style": "form"
+                },
+                "Remark6": {
+                  "style": "form"
+                },
+                "Remark7": {
+                  "style": "form"
+                },
+                "Remark8": {
+                  "style": "form"
+                },
+                "Remark9": {
+                  "style": "form"
+                },
+                "Remark10": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/update": {
+      "put": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Misno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationType": {
+                    "type": "string"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "Month": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "string"
+                  },
+                  "Total": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo3": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo4": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo5": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo6": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo7": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo8": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo9": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo10": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "Remark3": {
+                    "type": "string"
+                  },
+                  "Remark4": {
+                    "type": "string"
+                  },
+                  "Remark5": {
+                    "type": "string"
+                  },
+                  "Remark6": {
+                    "type": "string"
+                  },
+                  "Remark7": {
+                    "type": "string"
+                  },
+                  "Remark8": {
+                    "type": "string"
+                  },
+                  "Remark9": {
+                    "type": "string"
+                  },
+                  "Remark10": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Misno": {
+                  "style": "form"
+                },
+                "OrganizationType": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "Month": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Total": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Photo3": {
+                  "style": "form"
+                },
+                "Photo4": {
+                  "style": "form"
+                },
+                "Photo5": {
+                  "style": "form"
+                },
+                "Photo6": {
+                  "style": "form"
+                },
+                "Photo7": {
+                  "style": "form"
+                },
+                "Photo8": {
+                  "style": "form"
+                },
+                "Photo9": {
+                  "style": "form"
+                },
+                "Photo10": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "Remark3": {
+                  "style": "form"
+                },
+                "Remark4": {
+                  "style": "form"
+                },
+                "Remark5": {
+                  "style": "form"
+                },
+                "Remark6": {
+                  "style": "form"
+                },
+                "Remark7": {
+                  "style": "form"
+                },
+                "Remark8": {
+                  "style": "form"
+                },
+                "Remark9": {
+                  "style": "form"
+                },
+                "Remark10": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/delete/{id}": {
+      "delete": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/getall": {
+      "get": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/getbyid/{id}": {
+      "get": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/GetByOrganizationName": {
+      "get": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "parameters": [
+          {
+            "name": "organizationName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/GetByMonthYear": {
+      "get": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/GetTotalByOrganizationType": {
+      "get": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MonthlyInfrastructure/GetOrganizationsByType": {
+      "get": {
+        "tags": [
+          "MonthlyInfrastructure"
+        ],
+        "parameters": [
+          {
+            "name": "orgType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/Add": {
+      "post": {
+        "tags": [
+          "Nodel"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodelCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodelCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodelCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/Update/{id}": {
+      "put": {
+        "tags": [
+          "Nodel"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodelCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodelCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NodelCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "Nodel"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/GetAll": {
+      "get": {
+        "tags": [
+          "Nodel"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/GetAllNodelName": {
+      "get": {
+        "tags": [
+          "Nodel"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/GetHostelByNodel": {
+      "get": {
+        "tags": [
+          "Nodel"
+        ],
+        "parameters": [
+          {
+            "name": "nodelName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/GetBlockSeat": {
+      "get": {
+        "tags": [
+          "Nodel"
+        ],
+        "parameters": [
+          {
+            "name": "hostelName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/ImportExcel": {
+      "post": {
+        "tags": [
+          "Nodel"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodel/GetTotalHostelCount": {
+      "get": {
+        "tags": [
+          "Nodel"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodelentry/Add": {
+      "post": {
+        "tags": [
+          "Nodelentry"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "IdNodelEntry": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IdNodel": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AdmittedSeat": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Month": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Year": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "HeadCount1": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount2": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "IdNodelEntry": {
+                  "style": "form"
+                },
+                "IdNodel": {
+                  "style": "form"
+                },
+                "AdmittedSeat": {
+                  "style": "form"
+                },
+                "Month": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "HeadCount1": {
+                  "style": "form"
+                },
+                "HeadCount2": {
+                  "style": "form"
+                },
+                "photo1": {
+                  "style": "form"
+                },
+                "photo2": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodelentry/Update/{id}": {
+      "put": {
+        "tags": [
+          "Nodelentry"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "IdNodelEntry": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IdNodel": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AdmittedSeat": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Month": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Year": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "HeadCount1": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount2": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "encoding": {
+                "IdNodelEntry": {
+                  "style": "form"
+                },
+                "IdNodel": {
+                  "style": "form"
+                },
+                "AdmittedSeat": {
+                  "style": "form"
+                },
+                "Month": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "HeadCount1": {
+                  "style": "form"
+                },
+                "HeadCount2": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodelentry/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "Nodelentry"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodelentry/GetAll": {
+      "get": {
+        "tags": [
+          "Nodelentry"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Nodelentry/GetByMonthYear": {
+      "get": {
+        "tags": [
+          "Nodelentry"
+        ],
+        "parameters": [
+          {
+            "name": "month",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Organization/add": {
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Organization/update": {
+      "put": {
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrganizationCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Organization/delete/{sno}": {
+      "delete": {
+        "tags": [
+          "Organization"
+        ],
+        "parameters": [
+          {
+            "name": "sno",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Organization/getall": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Organization/import-excel": {
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Organization/TypesWithMonth": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Organization/TypesWithYear": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/StudentHealth/Add": {
+      "post": {
+        "tags": [
+          "StudentHealth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudenthealthCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudenthealthCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudenthealthCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentHealth/Update/{id}": {
+      "put": {
+        "tags": [
+          "StudentHealth"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudenthealthCommandModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudenthealthCommandModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudenthealthCommandModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentHealth/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "StudentHealth"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentHealth/GetById/{id}": {
+      "get": {
+        "tags": [
+          "StudentHealth"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentHealth/GetAll": {
+      "get": {
+        "tags": [
+          "StudentHealth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/Add": {
+      "post": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Sissno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Sno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "StudentName": {
+                    "type": "string"
+                  },
+                  "Dob": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "PhotoFile": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Sissno": {
+                  "style": "form"
+                },
+                "Sno": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "StudentName": {
+                  "style": "form"
+                },
+                "Dob": {
+                  "style": "form"
+                },
+                "PhotoFile": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/Update/{id}": {
+      "put": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Sissno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Sno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "StudentName": {
+                    "type": "string"
+                  },
+                  "Dob": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "PhotoFile": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Sissno": {
+                  "style": "form"
+                },
+                "Sno": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "StudentName": {
+                  "style": "form"
+                },
+                "Dob": {
+                  "style": "form"
+                },
+                "PhotoFile": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/Delete/{id}": {
+      "delete": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/import": {
+      "post": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/GetById/{id}": {
+      "get": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/GetAll": {
+      "get": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/GetStudentNames": {
+      "get": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "parameters": [
+          {
+            "name": "orgType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/GetStudentDetails": {
+      "get": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "parameters": [
+          {
+            "name": "orgType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "studentName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/GetStudentByName": {
+      "get": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "parameters": [
+          {
+            "name": "orgType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orgName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "studentName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/StudentInformation/GetCount": {
+      "get": {
+        "tags": [
+          "StudentInformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/add": {
+      "post": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "YearSno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationType": {
+                    "type": "string"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "string"
+                  },
+                  "Total": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo3": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo4": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo5": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo6": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo7": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo8": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo9": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo10": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "Remark3": {
+                    "type": "string"
+                  },
+                  "Remark4": {
+                    "type": "string"
+                  },
+                  "Remark5": {
+                    "type": "string"
+                  },
+                  "Remark6": {
+                    "type": "string"
+                  },
+                  "Remark7": {
+                    "type": "string"
+                  },
+                  "Remark8": {
+                    "type": "string"
+                  },
+                  "Remark9": {
+                    "type": "string"
+                  },
+                  "Remark10": {
+                    "type": "string"
+                  },
+                  "HeadCount1": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount2": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount3": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount4": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount5": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount6": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount7": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount8": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount9": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount10": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "encoding": {
+                "YearSno": {
+                  "style": "form"
+                },
+                "OrganizationType": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Total": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Photo3": {
+                  "style": "form"
+                },
+                "Photo4": {
+                  "style": "form"
+                },
+                "Photo5": {
+                  "style": "form"
+                },
+                "Photo6": {
+                  "style": "form"
+                },
+                "Photo7": {
+                  "style": "form"
+                },
+                "Photo8": {
+                  "style": "form"
+                },
+                "Photo9": {
+                  "style": "form"
+                },
+                "Photo10": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "Remark3": {
+                  "style": "form"
+                },
+                "Remark4": {
+                  "style": "form"
+                },
+                "Remark5": {
+                  "style": "form"
+                },
+                "Remark6": {
+                  "style": "form"
+                },
+                "Remark7": {
+                  "style": "form"
+                },
+                "Remark8": {
+                  "style": "form"
+                },
+                "Remark9": {
+                  "style": "form"
+                },
+                "Remark10": {
+                  "style": "form"
+                },
+                "HeadCount1": {
+                  "style": "form"
+                },
+                "HeadCount2": {
+                  "style": "form"
+                },
+                "HeadCount3": {
+                  "style": "form"
+                },
+                "HeadCount4": {
+                  "style": "form"
+                },
+                "HeadCount5": {
+                  "style": "form"
+                },
+                "HeadCount6": {
+                  "style": "form"
+                },
+                "HeadCount7": {
+                  "style": "form"
+                },
+                "HeadCount8": {
+                  "style": "form"
+                },
+                "HeadCount9": {
+                  "style": "form"
+                },
+                "HeadCount10": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/update": {
+      "put": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "YearSno": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "OrganizationType": {
+                    "type": "string"
+                  },
+                  "OrganizationName": {
+                    "type": "string"
+                  },
+                  "Block": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "string"
+                  },
+                  "Total": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Remark": {
+                    "type": "string"
+                  },
+                  "Photo1": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo2": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo3": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo4": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo5": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo6": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo7": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo8": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo9": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Photo10": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Remark1": {
+                    "type": "string"
+                  },
+                  "Remark2": {
+                    "type": "string"
+                  },
+                  "Remark3": {
+                    "type": "string"
+                  },
+                  "Remark4": {
+                    "type": "string"
+                  },
+                  "Remark5": {
+                    "type": "string"
+                  },
+                  "Remark6": {
+                    "type": "string"
+                  },
+                  "Remark7": {
+                    "type": "string"
+                  },
+                  "Remark8": {
+                    "type": "string"
+                  },
+                  "Remark9": {
+                    "type": "string"
+                  },
+                  "Remark10": {
+                    "type": "string"
+                  },
+                  "HeadCount1": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount2": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount3": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount4": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount5": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount6": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount7": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount8": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount9": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "HeadCount10": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "encoding": {
+                "YearSno": {
+                  "style": "form"
+                },
+                "OrganizationType": {
+                  "style": "form"
+                },
+                "OrganizationName": {
+                  "style": "form"
+                },
+                "Block": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Total": {
+                  "style": "form"
+                },
+                "Remark": {
+                  "style": "form"
+                },
+                "Photo1": {
+                  "style": "form"
+                },
+                "Photo2": {
+                  "style": "form"
+                },
+                "Photo3": {
+                  "style": "form"
+                },
+                "Photo4": {
+                  "style": "form"
+                },
+                "Photo5": {
+                  "style": "form"
+                },
+                "Photo6": {
+                  "style": "form"
+                },
+                "Photo7": {
+                  "style": "form"
+                },
+                "Photo8": {
+                  "style": "form"
+                },
+                "Photo9": {
+                  "style": "form"
+                },
+                "Photo10": {
+                  "style": "form"
+                },
+                "Remark1": {
+                  "style": "form"
+                },
+                "Remark2": {
+                  "style": "form"
+                },
+                "Remark3": {
+                  "style": "form"
+                },
+                "Remark4": {
+                  "style": "form"
+                },
+                "Remark5": {
+                  "style": "form"
+                },
+                "Remark6": {
+                  "style": "form"
+                },
+                "Remark7": {
+                  "style": "form"
+                },
+                "Remark8": {
+                  "style": "form"
+                },
+                "Remark9": {
+                  "style": "form"
+                },
+                "Remark10": {
+                  "style": "form"
+                },
+                "HeadCount1": {
+                  "style": "form"
+                },
+                "HeadCount2": {
+                  "style": "form"
+                },
+                "HeadCount3": {
+                  "style": "form"
+                },
+                "HeadCount4": {
+                  "style": "form"
+                },
+                "HeadCount5": {
+                  "style": "form"
+                },
+                "HeadCount6": {
+                  "style": "form"
+                },
+                "HeadCount7": {
+                  "style": "form"
+                },
+                "HeadCount8": {
+                  "style": "form"
+                },
+                "HeadCount9": {
+                  "style": "form"
+                },
+                "HeadCount10": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/delete/{id}": {
+      "delete": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/getall": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/getbyid/{id}": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/GetTotalByOrganizationTypeYear": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/GetTotalByOrganizationTypeY": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sno",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/GetTotalByOrganizationNameYear": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/GetTotalByOrganizationNameY": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "year",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sno",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/GetOrganizationsByType": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "orgType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/YearlyCalculation/GetAllByOrganizationName": {
+      "get": {
+        "tags": [
+          "YearlyCalculation"
+        ],
+        "parameters": [
+          {
+            "name": "organizationName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InformationCommandModel": {
+        "type": "object",
+        "properties": {
+          "infoSno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organizationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "block": {
+            "type": "string",
+            "nullable": true
+          },
+          "hostelSuperintendent": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSeat": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "admittedSeat": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          },
+          "remark2": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginCommandModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "loginRole": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NodelCommandModel": {
+        "type": "object",
+        "properties": {
+          "idNodel": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nodelName": {
+            "type": "string",
+            "nullable": true
+          },
+          "hostelName": {
+            "type": "string",
+            "nullable": true
+          },
+          "block": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSeat": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrganizationCommandModel": {
+        "type": "object",
+        "properties": {
+          "sno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "organizationType": {
+            "type": "string",
+            "nullable": true
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StudenthealthCommandModel": {
+        "type": "object",
+        "properties": {
+          "shsno": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sissno": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "month": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "string",
+            "nullable": true
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "bmi": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter JWT token like: Bearer {token}",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

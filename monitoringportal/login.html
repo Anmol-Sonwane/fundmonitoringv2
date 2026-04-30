@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | Monitoring Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --white: #ffffff;
+      --border: #e5e7eb;
+      --primary: #1f7a7a;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b1f2a, #123848, #1f5f6b);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle light glow accents */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  filter: blur(80px);
+}
+
+body::before {
+  width: 300px;
+  height: 300px;
+  top: -80px;
+  left: -80px;
+}
+
+body::after {
+  width: 250px;
+  height: 250px;
+  bottom: -80px;
+  right: -80px;
+}
+
+    /* ================= HEADER LOGOS ================= */
+    .login-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;  
+    }
+
+    .login-header img {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /* ================= LOGIN CARD ================= */
+    .login-wrapper {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #fdfefe;
+      padding: 32px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .login-card h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .login-card p {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 24px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      opacity: 0.95;
+    }
+
+    /* ================= FOOTER LOGO ================= */
+    .login-footer {
+      padding-top: 50px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      background: #fafafa;
+    }
+
+    .login-footer img {
+      height: 48px;
+      opacity: 0.85;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 480px) {
+      .login-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 32px;              /* equal spacing between logos */
+        margin-bottom: 18px;
+      }
+
+      .login-header img {
+        height: 48px;
+      }
+      .login-card {
+    padding: 24px 18px;
+    border-radius: 14px;
+  }
+
+  .login-card h2 {
+    font-size: 20px;
+  }
+
+  .login-card p {
+    font-size: 13px;
+  }
+
+  .login-btn {
+    padding: 11px;
+    font-size: 14px;
+  }
+    }
+  </style>
+</head>
+
+<body>
+
+  
+
+  <!-- LOGIN FORM -->
+  <main class="login-wrapper">
+    <div class="login-card">
+      <header class="login-header">
+    <img src="images/Emblem_of_India.svg" alt="Government Logo">
+    <img src="images/portal.png" alt="Ministry Logo">
+  </header>  
+      <h2>Monitoring Portal</h2>
+      <p>SIGN IN</p>  
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+      <footer class="login-footer">
+    <img src="images/dalogo3.png" alt="Footer Logo">
+  </footer> 
+    </div>
+    
+  </main>
+          
+  <script src="login.js"></script>
+
+  
+
+</body>
+</html>
+ 

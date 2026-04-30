@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="images/portal.png">
+<link rel="stylesheet" href="studentpanel.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header user-header">
+<div class="header-left">
+    <img src="images/Emblem_of_India.svg" alt="Government of India">
+    <div>
+        <h1>District Collector Office, Narayanpur</h1>
+        <p>Fund Monitoring Portal</p>
+    </div>
+</div>
+
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+
+<nav class="header-right" id="navMenu">
+    <a class="active" href="index.html">Home</a>
+    <a href="index.html" class="login-btn">Logout</a>
+</nav>
+</header>
+
+<!-- MAIN -->
+<main class="user-main">
+<div class="user-actions">
+
+<button class="user-card" onclick="openModal('studentInfoModal')">
+<h3>Student Information</h3>
+<p>Manage student records</p>
+</button>
+
+<button class="user-card" onclick="openModal('studentHealthModal')">
+<h3>Student Health</h3>
+<p>Monthly health tracking</p>
+</button>
+
+</div>
+</main>
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="stats-bar">
+
+<div class="stat overall-center overall-full">
+    <div class="icon">🎓</div>
+    <p>Total Students</p>
+
+    <h2 id="totalStudentTable">0</h2>
+</div>
+
+</section>
+
+<section class="stats-bar">
+
+<div class="stat overall-full">
+
+<h3>Filter</h3>
+<div id="totalCount" style="font-weight:bold; margin-bottom:8px;">
+    Total Records: 0
+</div>
+
+<div class="filter-bar">
+<select id="dashMonth" class="filter-input">
+<option value="">Month</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>
+
+<select id="dashYear" class="filter-input">
+<option value="">Year</option>
+<option>2025</option>
+<option>2026</option>
+<option>2027</option>
+</select>
+
+<button class="filter-btn" onclick="filterFit()">Fit</button>
+<button class="filter-btn" onclick="filterUnfit()">Unfit</button>
+<button class="filter-btn" onclick="resetFilter()">All</button>
+</div>
+
+</div>
+
+</section>
+
+<section class="stats-bar">
+<div class="stat overall-full">
+<h3>Student Health Table</h3>
+ <!-- FILTER BAR -->
+    <div class="filter-bar">
+
+        <select id="orgTypeFilter" class="filter-input">
+            <option value="">Organization Type</option>
+        </select>
+
+        <select id="orgNameFilter" class="filter-input">
+            <option value="">Organization Name</option>
+        </select>
+
+    </div>
+<div id="studentTableSection" class="table-wrapper"></div>
+</div>
+</section>
+
+<!-- OVERLAY -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+
+<!-- ================= STUDENT INFORMATION ================= -->
+
+<div class="modal" id="studentInfoModal">
+
+<h2>Student Information</h2>
+
+<form>
+
+<div class="form-grid">
+
+<button type="button" class="view-all-btn" onclick="openModal('viewStudentModal')">View All</button>
+
+<select id="orgType" class="filter-input">
+    <option value="">Select Organization Type</option>
+</select>
+
+<select id="orgName" class="filter-input">
+    <option value="">Select Organization Name</option>
+</select>
+<input id="block" placeholder="Block">
+<input id="studentName" placeholder="Student Name">
+<label id="dobLabel" class="form-label">Date Of Birth</label>
+<input id="dob" type="date">
+<label id="photoLabel" class="form-label">Student Photo</label>
+<input id="photo" type="file">
+
+<textarea id="remark" placeholder="Remark"></textarea>
+<div style="display:flex; gap:10px;">
+    <input type="file" id="importFile">
+    <button type="button" class="btn-secondary" onclick="importStudents()">Import</button>
+</div>
+</div>
+
+<div class="modal-actions">
+<button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+<button type="submit" class="btn-primary">Submit</button>
+</div>
+
+</form>
+</div>
+
+<!-- VIEW ALL STUDENT -->
+
+<div class="modal" id="viewStudentModal">
+
+<button onclick="goBack()" class="back-btn">⬅ Back</button>
+
+<h2>All Student Records</h2>
+
+<input type="text" id="searchInput" class="search-input" placeholder="Search...">
+
+<div class="filter-bar">
+<select id="filterOrgType" class="filter-input">
+    <option value="">All Types</option>
+</select>
+
+<select id="filterOrgName" class="filter-input">
+    <option value="">All Names</option>
+</select>
+
+<button class="filter-btn" id="exportBtn">Export</button>
+</div>
+
+<div class="table-wrapper">
+<table id="studentTable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Organization type</th>
+<th>Organization Name</th>
+<th>Block</th>
+<th>DOB</th>
+<th>Photo</th>   <!-- ✅ ADD -->
+<th>Remark</th>  <!-- ✅ ADD -->
+<th>Action</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+
+</div>
+
+<!-- ================= STUDENT HEALTH ================= -->
+
+<div class="modal" id="studentHealthModal">
+
+<h2>Student Health</h2>
+
+<form>
+
+<div class="form-grid">
+
+<button type="button" class="view-all-btn" onclick="openModal('viewHealthModal')">View All</button>
+
+
+
+ 
+<select id="healthOrgType" class="filter-input"><option value="">Select Organization Type</option></select>
+
+<select id="healthOrgName" class="filter-input"><option value="">Select Organization Name</option></select>
+
+<input id="healthStudentInput" list="studentList" placeholder="Search Student">
+<datalist id="studentList"></datalist>
+
+<input id="healthBlock" placeholder="Block" readonly>
+<input id="healthDob" type="date" readonly>
+
+ 
+<select id="healthMonth" class="filter-input">
+    <option value="">Select Month</option>
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+</select>
+
+<select id="healthYear" class="filter-input">
+    <option value="">Select Year</option>
+    <option>2026</option>
+    <option>2027</option>
+	<option>2028</option>
+</select>
+
+<input id="age" type="number" placeholder="Age(IN YEAR)">
+<input id="weight" type="number" step="0.01" placeholder="Weight (IN KG)">
+<input id="height" type="number" step="0.01" placeholder="Height (IN METER)">
+<input id="bmi" placeholder="BMI (Auto)" readonly>
+<textarea id="healthRemark" placeholder="Remark"></textarea>
+
+</div>
+
+<div class="modal-actions">
+<button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+<button type="submit" class="btn-primary">Submit</button>
+</div>
+
+</form>
+</div>
+
+<!-- VIEW HEALTH -->
+
+<div class="modal" id="viewHealthModal">
+
+    <button onclick="openModal('studentHealthModal')" class="back-btn">⬅ Back</button>
+
+    <h2>All Health Records</h2>
+
+    <!-- 🔽 FILTER SECTION -->
+    <div class="form-grid">
+
+        <select id="viewHealthOrgType" class="filter-input">
+            <option value="">Select Organization Type</option>
+        </select>
+
+        <select id="viewHealthOrgName" class="filter-input">
+            <option value="">Select Organization Name</option>
+        </select>
+
+    </div>
+
+    <!-- 🔽 TABLE -->
+    <div class="table-wrapper">
+        <table id="healthTable">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+					<th>Organization Type</th>
+					<th>Organization Name</th>
+                    <th>Block</th>
+                    <th>DOB</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Age</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>BMI</th>
+                    <th>Remark</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="healthTableBody">
+                <!-- Data will come here -->
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+let activeModal=null;
+
+function openModal(id){
+closeModal();
+activeModal=document.getElementById(id);
+document.getElementById("modalOverlay").style.display="block";
+activeModal.style.display="block";
+}
+
+function closeModal() {
+
+    const overlay = document.getElementById("modalOverlay");
+
+    if (overlay) {
+        overlay.style.display = "none";
+    }
+
+    // 🔥 CLOSE ALL MODALS (fix)
+    document.querySelectorAll(".modal").forEach(modal => {
+        modal.style.display = "none";
+    });
+
+    activeModal = null;
+}
+
+function toggleMenu(){
+document.getElementById("navMenu").classList.toggle("show");
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="studentpanel.js"></script>
+</body>
+</html>

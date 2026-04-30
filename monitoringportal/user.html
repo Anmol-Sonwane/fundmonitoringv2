@@ -1,0 +1,799 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8" />
+        <title>User Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="images/portal.png">
+        <link rel="stylesheet" href="user.css">
+        </head>
+        <body>
+        
+        <!-- Header Component -->
+        <header class="header user-header">
+        <div class="header-left">
+            <img src="images/Emblem_of_India.svg" alt="Government of India">
+            <div>
+            <h1>District Collector Office, Narayanpur</h1>
+            <p>Fund Monitoring Portal</p>
+            </div>
+        </div>
+
+        <!-- HAMBURGER -->
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+        <!-- NAV -->
+        <nav class="header-right" id="navMenu">
+            <a class="active" href="index.html">Home</a>
+            <a  href="index.html" class="login-btn">Logout</a>
+        </nav>
+        </header>
+
+
+        <!-- MAIN -->
+        <main class="user-main">
+        <div class="user-actions">
+            <button class="user-card" onclick="openModal('orgModal')"><h3>Organization Type</h3>
+            <p>Manage organization types</p></button>
+            <button class="user-card" onclick="openModal('infoModal')"><h3>Information Form</h3>
+            <p>Basic organization & hostel details</p></button>
+            <button class="user-card" onclick="openModal('yearlyModal')"><h3>Yearly Details Form</h3>
+            <p>Annual financial & activity details</p></button>
+            <button class="user-card" onclick="openModal('monthlyModal')"><h3>Monthly Calculation Form</h3>
+            <p>Monthly financial & activity details</p></button>
+            <button class="user-card" onclick="openModal('infraModal')"><h3>Monthly Infrastructure</h3>
+            <p>Infrastructure related monthly details</p></button>
+        </div>
+        </main>
+
+        <!-- ================= MODALS ================= -->
+
+        <!-- COMMON OVERLAY -->
+        <div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+
+       <!-- ORGANIZATION TYPE -->
+    <div class="modal" id="orgModal">
+    <h2>Organization Type</h2>
+
+    <form id="orgForm">
+        <div class="form-grid">
+            <button type="button" class="view-all-btn" id="viewAllBtn">View All</button>
+
+
+
+            <textarea id="organizationType" placeholder="Organization Type"></textarea>
+            <textarea id="orgRemark" placeholder="Remark"></textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+      <!-- INFORMATION FORM -->
+<div class="modal" id="infoModal">
+    <h2>Information Form</h2>
+
+    <form id="infoForm">
+	
+        <div class="form-grid">
+		
+
+            <button type="button" class="view-all-btn" onclick="openViewAllModal()">View All</button>
+
+
+            <select id="infoOrgType">
+                <option value="">Select Organization Type</option>
+            </select>
+
+            <input id="orgName" placeholder="Organization Name">
+            <input id="block" placeholder="Block">
+            <input id="superintendent" placeholder="Hostel Superintendent Name">
+            <input id="mobile" placeholder="Mobile No.">
+            <input id="totalSeats" placeholder="Total Seats">
+            <input id="admittedSeats" placeholder="Admitted Seats">
+            <textarea id="infoRemark" placeholder="Remark"></textarea>
+			<!-- Import Excel -->
+            <div style="display:flex; gap:10px; align-items:center;">
+                <input type="file" id="excelFile" accept=".xlsx,.xls">
+                <button type="button" class="btn-secondary" onclick="importExcel()">Import</button>
+            </div>
+        </div>
+		 
+ 
+    
+ 
+
+        <div class="modal-actions">
+		
+            <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+            <button class="btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+       <!-- YEARLY DETAILS FORM -->
+        <div class="modal" id="yearlyModal">
+        <h2>Yearly Details</h2>
+
+        <form id="yearlyForm" enctype="multipart/form-data">
+            <div class="form-grid">
+
+            <button type="button" class="view-all-btn" id="yearlyViewAllBtn">View All</button>
+
+        <select id="yearlyOrgType" onchange="loadYearlyOrgNames()">
+            <option value="">Select Organization Type</option>
+        </select>
+
+        <select id="yearlyOrgName" disabled>
+            <option value="">Select Organization Name</option>
+        </select>
+
+
+                <input placeholder="Block" id="yearlyBlock">
+
+                <input placeholder="Year" id="year">
+                <input placeholder="Total Amount" id="total">
+
+                <!-- YEARLY IMAGE DROPDOWN -->
+<div class="upload-group">
+
+    <!-- Dropdown Button -->
+    <button type="button" class="view-all-btn" onclick="toggleYearlyUploads()">
+        Upload Yearly Images ▼
+    </button>
+
+    <!-- Hidden Upload Section -->
+    <div id="yearlyUploadSection" style="display:none; margin-top:15px;">
+		<div style="margin-bottom:15px;">
+        <button type="button" onclick="openYearlyCamera()">Open Camera</button>
+        <video id="yearlyVideo" width="250" autoplay></video>
+        <canvas id="yearlyCanvas" style="display:none;"></canvas>
+		</div>
+         <!-- IMAGE ROW TEMPLATE (REPEATED 1–10) -->
+
+                    <!-- ROW 1 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(1)">Capture Image 1</button>
+                        <input type="text" id="yearlyRemark1" placeholder="Remark for Image 1">
+                        <img id="yearlyPreview1" width="200" style="display:none;">
+                        <div id="yearlyHeadcount1" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 2 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(2)">Capture Image 2</button>
+                        <input type="text" id="yearlyRemark2" placeholder="Remark for Image 2">
+                        <img id="yearlyPreview2" width="200" style="display:none;">
+                        <div id="yearlyHeadcount2" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 3 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(3)">Capture Image 3</button>
+                        <input type="text" id="yearlyRemark3" placeholder="Remark for Image 3">
+                        <img id="yearlyPreview3" width="200" style="display:none;">
+                        <div id="yearlyHeadcount3" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 4 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(4)">Capture Image 4</button>
+                        <input type="text" id="yearlyRemark4" placeholder="Remark for Image 4">
+                        <img id="yearlyPreview4" width="200" style="display:none;">
+                        <div id="yearlyHeadcount4" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 5 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(5)">Capture Image 5</button>
+                        <input type="text" id="yearlyRemark5" placeholder="Remark for Image 5">
+                        <img id="yearlyPreview5" width="200" style="display:none;">
+                        <div id="yearlyHeadcount5" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 6 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(6)">Capture Image 6</button>
+                        <input type="text" id="yearlyRemark6" placeholder="Remark for Image 6">
+                        <img id="yearlyPreview6" width="200" style="display:none;">
+                        <div id="yearlyHeadcount6" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 7 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(7)">Capture Image 7</button>
+                        <input type="text" id="yearlyRemark7" placeholder="Remark for Image 7">
+                        <img id="yearlyPreview7" width="200" style="display:none;">
+                        <div id="yearlyHeadcount7" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 8 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(8)">Capture Image 8</button>
+                        <input type="text" id="yearlyRemark8" placeholder="Remark for Image 8">
+                        <img id="yearlyPreview8" width="200" style="display:none;">
+                        <div id="yearlyHeadcount8" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 9 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(9)">Capture Image 9</button>
+                        <input type="text" id="yearlyRemark9" placeholder="Remark for Image 9">
+                        <img id="yearlyPreview9" width="200" style="display:none;">
+                        <div id="yearlyHeadcount9" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 10 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureYearlyPhoto(10)">Capture Image 10</button>
+                        <input type="text" id="yearlyRemark10" placeholder="Remark for Image 10">
+                        <img id="yearlyPreview10" width="200" style="display:none;">
+                        <div id="yearlyHeadcount10" class="headcount-text"></div>
+                    </div>
+
+    </div>
+</div>
+
+                <textarea placeholder="Remark" id="remark"></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secondary" id="yearlyCancelBtn">
+				Cancel
+				</button>
+                <button type="submit" class="btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+
+
+     <!-- MONTHLY FORM -->
+<div class="modal" id="monthlyModal">
+    <h2>Monthly Calculation</h2>
+    <form id="monthlyForm">
+        <div class="form-grid">
+            <button type="button" class="view-all-btn" onclick="openMonthlyViewAll()">View All</button>
+
+			<select id="organizationTypeDropdown">
+                <option value="">Select Organization Type</option>
+            </select>
+
+            <select id="organizationNameDropdown">
+                <option value="">Select Organization Name</option>
+            </select>
+
+            <input id="blockInput" placeholder="Block">
+            <input id="admittedSeatsInput" type="number" placeholder="Admitted Seats">
+             
+			 <select id="monthInput">
+        <option value="">All Months</option>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+    </select>
+            <input id="yearInput" type="number" placeholder="Year">
+            <input id="amountInput" type="number" placeholder="Amount">
+            <input id="totalInput" type="number" placeholder="Total" readonly>
+
+            <!-- MONTHLY IMAGE DROPDOWN -->
+<div class="upload-group">
+
+    <!-- Dropdown Button -->
+    <button type="button" class="view-all-btn" onclick="toggleMonthlyUploads()">
+        Upload Monthly Images ▼
+    </button>
+
+    <!-- Hidden Upload Section -->
+    <div id="monthlyUploadSection" style="display:none; margin-top:15px;">
+		<div style="margin-bottom:15px;">
+        <button type="button" onclick="openMonthlyCamera()">Open Camera</button>
+        <video id="monthlyVideo" width="250" autoplay></video>
+        <canvas id="monthlyCanvas" style="display:none;"></canvas>
+		</div>
+        <!-- 10 Upload Rows -->
+        
+                    <!-- ROWS 1–10 -->
+
+                    <!-- ROW 1 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(1)">Capture Image 1</button>
+                        <input type="text" id="monthlyRemark1" placeholder="Remark for Image 1">
+                        <img id="monthlyPreview1" width="200" style="display:none;">
+                        <div id="monthlyHeadcount1" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 2 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(2)">Capture Image 2</button>
+                        <input type="text" id="monthlyRemark2" placeholder="Remark for Image 2">
+                        <img id="monthlyPreview2" width="200" style="display:none;">
+                        <div id="monthlyHeadcount2" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 3 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(3)">Capture Image 3</button>
+                        <input type="text" id="monthlyRemark3" placeholder="Remark for Image 3">
+                        <img id="monthlyPreview3" width="200" style="display:none;">
+                        <div id="monthlyHeadcount3" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 4 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(4)">Capture Image 4</button>
+                        <input type="text" id="monthlyRemark4" placeholder="Remark for Image 4">
+                        <img id="monthlyPreview4" width="200" style="display:none;">
+                        <div id="monthlyHeadcount4" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 5 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(5)">Capture Image 5</button>
+                        <input type="text" id="monthlyRemark5" placeholder="Remark for Image 5">
+                        <img id="monthlyPreview5" width="200" style="display:none;">
+                        <div id="monthlyHeadcount5" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 6 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(6)">Capture Image 6</button>
+                        <input type="text" id="monthlyRemark6" placeholder="Remark for Image 6">
+                        <img id="monthlyPreview6" width="200" style="display:none;">
+                        <div id="monthlyHeadcount6" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 7 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(7)">Capture Image 7</button>
+                        <input type="text" id="monthlyRemark7" placeholder="Remark for Image 7">
+                        <img id="monthlyPreview7" width="200" style="display:none;">
+                        <div id="monthlyHeadcount7" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 8 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(8)">Capture Image 8</button>
+                        <input type="text" id="monthlyRemark8" placeholder="Remark for Image 8">
+                        <img id="monthlyPreview8" width="200" style="display:none;">
+                        <div id="monthlyHeadcount8" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 9 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(9)">Capture Image 9</button>
+                        <input type="text" id="monthlyRemark9" placeholder="Remark for Image 9">
+                        <img id="monthlyPreview9" width="200" style="display:none;">
+                        <div id="monthlyHeadcount9" class="headcount-text"></div>
+                    </div>
+
+                    <!-- ROW 10 -->
+                    <div class="upload-row">
+                        <button type="button" onclick="captureMonthlyPhoto(10)">Capture Image 10</button>
+                        <input type="text" id="monthlyRemark10" placeholder="Remark for Image 10">
+                        <img id="monthlyPreview10" width="200" style="display:none;">
+                        <div id="monthlyHeadcount10" class="headcount-text"></div>
+                    </div>
+
+
+    </div>
+</div>
+
+            <textarea id="remarkInput" placeholder="Remark"></textarea>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" id="monthlyCancelBtn">
+    Cancel
+</button>
+            <button type="submit" class="btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+<!-- MONTHLY INFRASTRUCTURE FORM -->
+<div class="modal" id="infraModal">
+    <h2>Monthly Infrastructure</h2>
+
+    <form id="infraForm" enctype="multipart/form-data">
+        <div class="form-grid">
+
+            <button type="button" class="view-all-btn" id="infraViewAllBtn">
+                View All
+            </button>
+
+            <select id="infraOrgType" onchange="loadInfraOrgNames()">
+                <option value="">Select Organization Type</option>
+            </select>
+
+            <select id="infraOrgName" disabled>
+                <option value="">Select Organization Name</option>
+            </select>
+
+            <input placeholder="Block" id="infraBlock">
+
+            <!-- ✅ EXTRA MONTH DROPDOWN (Added as requested) -->
+            <select id="infraMonth">
+                <option value="">Select Month</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+
+            <input placeholder="Year" id="infraYear">
+            <input placeholder="Total Amount" id="infraTotal">
+
+            <!-- INFRASTRUCTURE IMAGE DROPDOWN -->
+            <div class="upload-group">
+
+                <!-- Dropdown Button -->
+                <button type="button" class="view-all-btn" onclick="toggleInfraUploads()">
+                    Upload Infrastructure Images ▼
+                </button>
+
+                <!-- Hidden Upload Section -->
+                <div id="infraUploadSection" style="display:none; margin-top:15px;">
+				<div style="margin-bottom:15px;">
+					<button type="button" onclick="openInfraCamera()">Open Camera</button>
+					<video id="infraVideo" width="250" autoplay></video>
+					<canvas id="infraCanvas" style="display:none;"></canvas>
+				</div>
+                    <!-- 10 Upload Rows -->
+                    <!-- Row 1 -->
+                     <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(1)">Capture Image 1</button>
+						<input type="text" id="infraRemark1" placeholder="Remark for Image 1">
+						<img id="infraPreview1" width="200">
+					</div>
+
+                    <!-- Row 2 -->
+                   <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(2)">Capture Image 2</button>
+						<input type="text" id="infraRemark2" placeholder="Remark for Image 2">
+						<img id="infraPreview2" width="200">
+					</div>
+
+                    <!-- Row 3 -->
+                    <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(3)">Capture Image 3</button>
+						<input type="text" id="infraRemark3" placeholder="Remark for Image 3">
+						<img id="infraPreview3" width="200">
+					</div>
+
+                    <!-- Row 4 -->
+                    <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(4)">Capture Image 4</button>
+						<input type="text" id="infraRemark4" placeholder="Remark for Image 4">
+						<img id="infraPreview4" width="200">
+					</div>
+
+                    <!-- Row 5 -->
+                   <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(5)">Capture Image 5</button>
+						<input type="text" id="infraRemark5" placeholder="Remark for Image 5">
+						<img id="infraPreview5" width="200">
+					</div>
+
+                    <!-- Row 6 -->
+                    <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(6)">Capture Image 6</button>
+						<input type="text" id="infraRemark6" placeholder="Remark for Image 6">
+						<img id="infraPreview6" width="200">
+					</div>
+                    <!-- Row 7 -->
+                   <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(7)">Capture Image 7</button>
+						<input type="text" id="infraRemark7" placeholder="Remark for Image 7">
+						<img id="infraPreview7" width="200">
+					</div>
+
+                    <!-- Row 8 -->
+                   <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(8)">Capture Image 8</button>
+						<input type="text" id="infraRemark8" placeholder="Remark for Image 8">
+						<img id="infraPreview8" width="200">
+					</div>
+
+                    <!-- Row 9 -->
+                    <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(9)">Capture Image 9</button>
+						<input type="text" id="infraRemark9" placeholder="Remark for Image 9">
+						<img id="infraPreview9" width="200">
+					</div>
+
+                    <!-- Row 10 -->
+                   <div style="margin-bottom:10px;">
+						<button type="button" onclick="captureInfraPhoto(10)">Capture Image 10</button>
+						<input type="text" id="infraRemark10" placeholder="Remark for Image 10">
+						<img id="infraPreview10" width="200">
+					</div>
+
+                </div>
+            </div>
+
+            <textarea placeholder="Remark" id="infraRemark"></textarea>
+
+        </div>
+<div class="modal-actions">
+        <button type="button" class="btn-secondary" id="infraCancelBtn">
+    Cancel
+</button>
+            <button type="submit" class="btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+<!-- VIEW ALL ORGANIZATION MODAL -->
+<div class="modal" id="orgViewModal">
+    <button class="back-btn" onclick="backToOrgModal()">← Back</button>
+    <h2>All Organization Types</h2>
+
+    <table class="data-table">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Organization Type</th>
+            <th>Remark</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="orgTableBody"></tbody>
+</table>
+</div>
+
+<!-- VIEW ALL  MODAL -->
+<div class="modal" id="viewAllModal">
+    <div class="modal-content large">
+	<button class="btn-secondary" onclick="closeViewAllModal()">Close</button>
+        <h2>All Information Records</h2>
+		<!-- Dynamic Search -->
+		 
+		<div class="search-container">
+    <input
+        type="text"
+        id="infoSearch"
+        placeholder="Search by organization, block, month, year..."
+        onkeyup="filterInfoTable()"
+    />
+</div>
+		 
+<div class="table-scroll">
+  <table class="data-table">
+            <thead>
+                <tr>
+					<th>InfoSno</th>
+                    <th>Org Type</th>
+                    <th>Org Name</th>
+                    <th>Block</th>
+                    <th>Superintendent</th>
+                    <th>Mobile</th>
+                    <th>Total</th>
+                    <th>Admitted</th>
+                    <th>Remark</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="infoTableBody"></tbody>
+        </table>
+
+    </div>  
+    </div>
+</div>
+<!-- VIEW ALL MONTHLY RECORDS MODAL -->
+<div class="modal" id="viewAllMonth" style="display:none;">
+    <h2>All Monthly Records</h2>
+	<div class="table-search">
+    <button class="btn-secondary" onclick="backFromMonthlyView()">Back</button>
+    <input
+        type="text"
+        id="tableSearch"
+        placeholder="Search by organization, block, month, year..."
+        onkeyup="filterMonthlyTable()"
+    />
+ 
+
+        
+    </div>
+    <div class="table-scroll">
+    <div style="overflow-x:auto;" >
+        <table id="monthlyTable" class="data-table">
+            <thead>
+                <tr>
+                    <th>MonSno</th>
+                    <th>Organization Type</th>
+                    <th>Organization Name</th>
+                    <th>Block</th>
+                    <th>Admitted Seats</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Amount</th>
+                    <th>Total</th>
+                    <th>Remark</th>
+					<th>photos</th>
+					<th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be added dynamically -->
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+<!-- PHOTO VIEW MODAL -->
+<div class="modal" id="photoViewModal" style="display:none;">
+    <h3>View Photo</h3>
+
+    <div style="text-align:center;">
+        <img id="photoPreview" src="" style="max-width:90%; max-height:70vh;">
+    </div>
+
+    <div class="modal-actions">
+        <button class="btn-secondary" onclick="closePhotoModal()">Close</button>
+    </div>
+</div>
+
+<!-- VIEW ALL YEARLY RECORDS MODAL -->
+<div class="modal" id="viewAllYearly" style="display:none;">
+    <h2>All Yearly Records</h2>
+    
+	<div class="table-search">
+    <button class="back-btn" onclick="closeYearlyView()">← Back</button>
+	<input type="text" id="yearlySearch" placeholder="Search by organization, block, year..." oninput="filterYearlyTable()">
+	 
+	 
+        
+    </div>
+    <div class="table-scroll">
+    
+        <table id="yearlyTable" class="data-table">
+            <thead>
+                <tr>
+                    <th>YearSno</th>
+                    <th>Organization Type</th>
+                    <th>Organization Name</th>
+                    <th>Block</th>
+                    <th>Year</th>
+                    <th>Total</th>
+                    <th>Remark</th>
+                    <th>Photos</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be added dynamically -->
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+        <!-- PHOTO PREVIEW MODAL -->
+        <div class="modal" id="photoPreviewModal" style="display:none;">
+            <button class="btn-secondary" onclick="closePhotoPreview()">Close</button>
+            <img id="photoPreviewImg" src="" alt="Photo Preview" style="max-width:100%;">
+        </div>
+<!-- VIEW ALL INFRA RECORDS MODAL -->
+<div class="modal" id="viewAllInfra" style="display:none;">
+    <h2>All Monthly Infrastructure Records</h2>
+
+    <div class="table-search">
+        <button class="btn-secondary" onclick="backFromInfraView()">Back</button>
+		 <input 
+        type="text" 
+        id="infraSearchInput" 
+        placeholder="Search records..."
+        style="padding:6px; width:250px;"
+        onkeyup="searchInfraTable()"
+    >
+    </div>
+
+    <div class="table-scroll">
+        <table id="infraTable" class="data-table">
+            <thead>
+                <tr>
+                    <th>MiSno</th>
+                    <th>Organization Type</th>
+                    <th>Organization Name</th>
+                    <th>Block</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th>Total</th>
+                    <th>Remark</th>
+                    <th>Photos</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- IMAGE PREVIEW MODAL -->
+<div class="modal" id="infraphotoPreviewModal" style="display:none;">
+    <h2>Photo Preview</h2>
+
+    <div style="text-align:center;">
+        <img id="previewImage" 
+             style="max-width:100%; max-height:500px; border-radius:8px;">
+        <p id="previewRemark" style="margin-top:10px;"></p>
+    </div>
+
+    <div class="modal-actions">
+        <button class="btn-secondary" onclick="closePhotoinfra()">Close</button>
+    </div>
+</div>
+		
+        <script>
+            let activeModal = null;
+
+            function openModal(id) {
+            closeModal();
+            activeModal = document.getElementById(id);
+            document.getElementById("modalOverlay").style.display = "block";
+            activeModal.style.display = "block";
+			// Load organization dropdown when Information modal opens
+			if (id === "infoModal") {
+					loadOrganizationDropdown();
+			}
+			// Bind dropdowns dynamically when Yearly Modal opens
+			if (id === "yearlyModal") {
+			bindYearlyDropdowns();
+			}
+
+            }
+
+            function closeModal() {
+            document.getElementById("modalOverlay").style.display = "none";
+            if (activeModal) {
+                activeModal.style.display = "none";
+                activeModal = null;
+            }
+            }
+            
+            function toggleMenu() {
+                document.getElementById("navMenu").classList.toggle("show");
+            
+            }
+			function toggleInfraUploads() {
+                const section = document.getElementById("infraUploadSection");
+                section.style.display = section.style.display === "none" ? "block" : "none";
+            }
+            function toggleYearlyUploads() {
+                const section = document.getElementById("yearlyUploadSection");
+                section.style.display = section.style.display === "none" ? "block" : "none";
+            }
+
+            function toggleMonthlyUploads() {
+                const section = document.getElementById("monthlyUploadSection");
+                section.style.display = section.style.display === "none" ? "block" : "none";
+            }
+        </script>
+		<script src="user.js"></script>
+        </body>
+        </html>

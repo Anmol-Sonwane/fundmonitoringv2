@@ -1,0 +1,6 @@
+@fundmonitoring_HostAddress = http://localhost:5143
+
+GET {{fundmonitoring_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,332 @@
+/* ===========================
+   MONTHLY MODAL STYLES
+   =========================== */
+
+.monthly-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* ================= MODAL BOX ================= */
+
+.monthly-modal-content {
+  background: #fff;
+  width: 60%;
+  margin: 6% auto;
+  padding: 25px;
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+
+  /* Scroll architecture */
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ================= HEADER ================= */
+
+.monthly-modal-content h2 {
+  margin-bottom: 15px;
+  color: #1f3c88;
+  flex-shrink: 0;
+}
+
+.monthly-close,
+.close-btn {
+  float: right;
+  cursor: pointer;
+}
+
+.monthly-close {
+  font-size: 26px;
+  color: #444;
+}
+
+.monthly-close:hover {
+  color: red;
+}
+
+.close-btn {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+}
+
+.close-btn:hover {
+  background: #e64444;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ================= FILTER BAR ================= */
+
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 0 20px;
+  flex-shrink: 0;
+}
+
+.filter-bar select,
+.filter-bar button {
+  padding: 9px 14px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.filter-bar select {
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.filter-bar select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.filter-bar button {
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-bar button:hover {
+  background: #166666;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ================= SEARCH BAR ================= */
+
+#orgNameSearch {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 14px 0 18px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+
+#orgNameSearch:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+/* ================= INFO BUTTON ================= */
+
+.info-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  background: var(--primary-soft);
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.info-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ================= TABLE SCROLL AREA ================= */
+
+.table-scroll {
+  flex: 1;
+  overflow: auto;
+  min-height: 0; /* important for flex scroll */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ================= TABLE ================= */
+
+.monthly-table thead th {
+  position: sticky;
+  top: 0;
+  background: #f1f5ff;
+  z-index: 2;
+}
+
+.monthly-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+.monthly-table th,
+.monthly-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.monthly-table th {
+  background: #f1f5ff;
+  text-align: left;
+}
+
+.monthly-table tr:hover {
+  background: #f9f9f9;
+}
+
+/* Horizontal scrollbar */
+.table-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+/* ================= WIDE TABLE SUPPORT ================= */
+
+#orgDetailsModalMonthly table,
+#orgDetailsModalYearly table,
+#orgInfoModal table {
+  min-width: 900px;
+}
+
+/* ================= BACK BUTTON ================= */
+
+.back-btn {
+  background: #166666;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.back-btn:hover {
+  background: #145454;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+/* ================= INFO MODAL SCROLL FIX ================= */
+
+/* Allow scrolling inside info modal body */
+#orgInfoModal .monthly-modal-content {
+  overflow: hidden; /* keep layout safe */
+}
+
+
+
+/* ================= DATA TABLE (USER MODALS) ================= */
+
+.data-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.data-table th {
+  background: #f1f5ff;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.data-table tr:hover {
+  background: #f9f9f9;
+}
+.modal {
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal h2,
+.modal .table-search,
+.modal .search-container {
+  flex-shrink: 0;
+}
+
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .monthly-modal-content {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 14px;
+  }
+  #orgInfoModal table {
+    max-height: 55vh; 
+  }
+}
+
+@media (max-width: 480px) {
+
+  .monthly-modal-content {
+    overflow: visible; /* allow native select dropdown */
+  }
+
+  .monthly-table {
+    font-size: 13px;
+  }
+
+  .monthly-table th,
+  .monthly-table td {
+    padding: 10px;
+  }
+
+  .filter-bar {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .filter-bar select {
+    font-size: 15px;
+    padding: 12px 14px;
+    min-height: 46px; /* proper touch target */
+  }
+
+  .filter-bar button {
+    min-height: 46px;
+    font-size: 15px;
+  }
+}

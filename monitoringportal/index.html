@@ -1,0 +1,415 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8" />
+        <title>Monitoring Portal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="images/portal.png">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="monthly-modal.css">
+        </head>
+        <body>
+
+        <!-- ================= HEADER ================= -->
+        <header class="header">
+            <div class="header-left">
+                <img src="images/Emblem_of_India.svg" alt="Govt Logo">
+                <div>
+                    <h1>District Collector Office, Narayanpur</h1>
+                    <p>Fund Monitoring Portal</p>
+                </div>
+            </div>
+
+            <!-- HAMBURGER -->
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+            <div class="header-right" id="navMenu">     
+                <a class="active" href="#">Dashboard</a>
+                
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </header>
+
+
+
+        <!-- ================= STATS BAR ================= -->
+
+    <!-- OVERALL FULL WIDTH -->
+    <section class="stats-bar overall-wrapper">
+        <div class="stat overall-center overall-full">
+            <div class="icon">₹</div>
+            <div>
+                <p>Overall Expenses</p>
+                <h3 id="overallExpenses">₹ 0</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- OTHER 3 BUTTONS -->
+    <section class="stats-bar three-stats">
+
+        <!-- Monthly Button -->
+        <a href="javascript:void(0)" class="stat stat-click" id="monthExpensesBtn">
+            <div class="icon">📅</div>
+            <div>
+                <p>Monthly Expenses</p>
+                <h3 id="monthlyExpenses">₹ 0</h3>
+            </div>
+        </a>
+
+        <!-- Yearly Button -->
+        <a href="javascript:void(0)" class="stat stat-click" id="yearExpensesBtn">
+            <div class="icon">🏗</div>
+            <div>
+                <p>Yearly Expenses</p>
+                <h3 id="yearlyExpenses">₹ 0</h3>
+            </div>
+        </a>
+
+        <!-- Infrastructure Button -->
+        <a href="javascript:void(0)" class="stat stat-click" id="infraExpensesBtn">
+            <div class="icon">🏢</div>
+            <div>
+                <p>Infrastructure Expenses</p>
+                <h3 id="infraExpenses">₹ 0</h3>
+            </div>
+        </a>
+
+    </section>
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <div class="main">
+            <section class="card">
+                <h2>Development Fund</h2>
+                <div class="card-content">
+                    <div class="donut-chart">
+                        <div class="donut" id="donut">
+                            <span id="donutPercentage">0%</span>
+                        </div>
+                        <div class="legend">
+        <p>
+            <span class="blue" data-type="monthly"></span>
+            Monthly expenses: <span id="monthlyPercent">0%</span>
+        </p>
+
+        <p>
+            <span class="green" data-type="yearly"></span>
+            Yearly expenses: <span id="yearlyPercent">0%</span>
+        </p>
+
+        <p>
+            <span class="orange" data-type="infra"></span>
+            Infrastructure expenses: <span id="infraPercent">0%</span>
+        </p>
+    </div>
+                    </div>
+                    <div class="description">
+                        Chart displays the data of Fund Recommended for the Development Work 
+                        versus the Available Fund from the Total Limit.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= MONTHLY MODAL ================= -->
+        <div id="monthlyModal" class="monthly-modal">
+            <div class="monthly-modal-content">
+                <span class="monthly-close" onclick="closeMonthlyModal()">&times;</span>
+                <h2>Monthly Expenses by Organization Type</h2>
+                
+                <div class="filter-bar">
+            <select id="monthFilter">
+                <option value="">All Months</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
+
+            <select id="yearFilter">
+                
+                <option value="">All Years</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2027">2028</option>
+                <option value="2027">2029</option>
+                <option value="2027">2030</option>
+            </select>
+
+            <button onclick="loadMonthlySummary()">Apply</button>
+        </div>
+                <div class="table-scroll">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Organization Type</th>
+                            <th>Total Amount (₹)</th>
+                        </tr>
+                    </thead>        
+                    <tbody id="monthlySummaryBody">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= YEARLY MODAL ================= -->
+        <div id="yearlyModal" class="monthly-modal">
+            <div class="monthly-modal-content">
+                <span class="monthly-close" onclick="closeYearlyModal()">&times;</span>
+                <h2>Yearly Expenses by Organization Type</h2>
+                <!-- FILTER BAR -->
+        <div class="filter-bar" style="margin-bottom: 10px;">
+            <label for="yearFilter">Year:</label>
+            <select id="yearFilter2">
+                <option value="">All Years</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2027">2028</option>
+                <option value="2027">2029</option>
+                <option value="2027">2030</option>
+            </select>
+            <button type="button" id="applyYearFilter">Apply</button>
+        </div>
+
+                <div class="table-scroll">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Organization Type</th>
+                            <th>Total Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="yearlySummaryBody">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ORGANIZATION NAME MODAL ================= -->
+        <div id="orgNameModal" class="monthly-modal">
+
+            <div class="monthly-modal-content">
+                <button class="back-btn" onclick="backToOrgType()">← Back</button>
+                <h2>Organization-wise Monthly Expenses</h2>
+                <input
+                        type="text"
+                        id="orgNameSearch"
+                        placeholder="Search organization..."
+                        onkeyup="filterOrgNames()"
+                        style="width:100%; padding:8px; margin:10px 0;"
+                    >
+                    <div class="table-scroll">
+                    <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Organization Name</th>
+                            <th>Total Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orgNameSummaryBody">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- MONTHLY ORGANIZATION DETAILS MODAL -->
+        <div id="orgDetailsModalMonthly" class="monthly-modal">
+            <div class="monthly-modal-content">
+                <div class="modal-header">
+                    <button class="back-btn" onclick="backToOrgName()">← Back</button>
+                    <button class="info-btn" onclick="openInfoModal()">Information</button>
+
+                </div>
+                <h2>Monthly Organization Details</h2>
+                <div class="table-scroll">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Block</th>
+                            <th>Admitted Seat</th>
+                            <th>Month</th>
+                            <th>Year</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                            <th>Remark</th>
+                            <th>Photos</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="orgDetailsBodyMonthly">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= YEARLY ORGANIZATION DETAILS MODAL ================= -->
+        <div id="orgDetailsModalYearly" class="monthly-modal">
+            <div class="monthly-modal-content">
+                <button class="back-btn" onclick="backToOrgName()">← Back</button>
+                <button class="info-btn" onclick="openInfoModal()">Information</button>
+
+                <h2>Yearly Organization Details</h2>
+                <div class="table-scroll">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Block</th>
+                            <th>Year</th>
+                            <th>Total</th>
+                            <th>Remark</th>
+                            <th>Photos</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody id="orgDetailsBodyYearly">
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================== Information Modal ================== -->
+        <div id="orgInfoModal" class="monthly-modal">
+            <div class="monthly-modal-content">
+                <button class="close-btn" onclick="closeOrgInfoModal()">× Close</button>
+                <h2>Organization Information</h2>
+                <div class="table-scroll">
+                <table class="monthly-table">
+                    <tbody id="orgInfoBody">
+                    <thead>
+                        <tr>
+                            <th>Organization Name</th>
+                            <th>Block</th>
+                            <th>Hostel Superintendent</th>
+                            <th>Mobile No</th>
+                            <th>Total Seat</th>
+                            <th>Admitted Seat</th>
+                            <th>Remark</th>
+                            <th>Remark 2</th>
+                        </tr>
+                    </thead>   <!-- Dynamic content will be inserted here -->
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ================= INFRASTRUCTURE MODAL ================= -->
+    <div id="infraModal" class="monthly-modal">
+        <div class="monthly-modal-content">
+            <span class="monthly-close" onclick="closeInfraModal()">&times;</span>
+            <h2>Infrastructure Expenses by Organization Type</h2>
+
+            <div class="filter-bar">
+                <select id="infraMonthFilter">
+                    <option value="">All Months</option>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+
+                <select id="infraYearFilter">
+                    <option value="">All Years</option>
+                    <option>2025</option>
+                    <option>2026</option>
+                    <option>2027</option>
+                    <option>2028</option>
+                    <option>2029</option>
+                    <option>2030</option>
+                </select>
+
+                <button onclick="loadInfraSummary()">Apply</button>
+            </div>
+
+            <div class="table-scroll">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Organization Type</th>
+                            <th>Total Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="infraSummaryBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- IMAGE PREVIEW MODAL -->
+    <div id="imagePreviewModal" class="image-modal">
+        <span class="close-image" onclick="closeImageModal()">×</span>
+        <img class="image-modal-content" id="previewImage">
+    </div>
+
+    <!-- new -->
+    <div id="infraDetailsModal" class="monthly-modal">
+        <div class="monthly-modal-content">
+            <button class="back-btn" onclick="backToOrgName()">← Back</button>
+            <button class="info-btn" onclick="openInfoModal()">Information</button>
+            <h2>Infrastructure Details</h2>
+            <div class="table-scroll">
+                <table class="monthly-table">
+                    <thead>
+                        <tr>
+                            <th>Block</th>
+                            <th>Month</th>
+                            <th>Year</th>
+                            <th>Total</th>
+                            <th>Remark</th>
+                            <th>Photos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="infraDetailsBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- ================= SCRIPTS ================= -->
+        <script>
+            function toggleMenu() {
+                document.getElementById("navMenu").classList.toggle("show");
+            } 
+
+            //infra modal
+            document.getElementById("infraExpensesBtn")
+            .addEventListener("click", function() {
+                document.getElementById("infraModal").style.display = "block";
+            });
+
+            function closeInfraModal() {
+                document.getElementById("infraModal").style.display = "none";
+            }
+        </script>
+        
+        <script src="calculation.js"></script>
+        </body>
+        </html>
+        

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nodal Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="images/portal.png">
+<link rel="stylesheet" href="nodalpanelstyles.css">
+</head>
+<body>
+
+<!--Header -->
+<header class="header user-header">
+<div class="header-left">
+    <img src="images/Emblem_of_India.svg" alt="Government of India">
+    <div>
+    <h1>District Collector Office, Narayanpur</h1>
+    <p>Fund Monitoring Portal</p>
+    </div>
+</div>
+
+<!-- Hamburger -->
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+
+<!-- NavBar -->
+<nav class="header-right" id="navMenu">
+            <a class="active" href="index.html">Home</a>
+            <a  href="index.html" class="login-btn">Logout</a>
+        </nav>
+        </header>
+
+
+<!-- MAIN -->
+<main class="user-main">
+<div class="user-actions">
+
+<button class="user-card" onclick="openModal('nodalInfoModal')">
+<h3>Nodal Information</h3>
+<p>Manage nodal hostel information</p>
+</button>
+
+<button class="user-card" onclick="openModal('nodalVisitModal')">
+<h3>Nodal Hostel Visit Entry</h3>
+<p>Monthly nodal hostel visit entry</p>
+</button>
+
+</div>
+</main>
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="stats-bar">
+
+<div class="stat overall-center overall-full">
+<div class="icon">🏠</div>
+<p>Total Hostels</p>
+
+<div id="totalHostelTable" class="table-wrapper"></div>
+
+</div>
+
+</section>
+
+
+<section class="stats-bar three-stats">
+
+<div class="stat">
+
+<div class="icon">📅</div>
+
+<p>Filter</p>
+
+<select title="Month" id="dashMonth" class="filter-input">
+<option value="">Month</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>
+
+<select id="dashYear" class="filter-input">
+<option value="">Year</option>
+<option>2025</option>
+<option>2026</option>
+<option>2027</option>
+<option>2028</option>
+</select>
+
+</div>
+
+
+<div class="stat">
+<div class="icon">✅</div>
+<p>Total Visited</p>
+<h3 id="visitedStats">0</h3>
+</div>
+
+
+<div class="stat">
+<div class="icon">❌</div>
+<p>Not Visited</p>
+<h3 id="notVisitedStats">0</h3>
+</div>
+
+</section>
+
+
+<section class="stats-bar">
+
+<div class="stat overall-full">
+
+<h3>Hostel Visit Table</h3>
+
+<div id="visitTableSection" class="table-wrapper"></div>
+
+<button class="btn-primary">Export</button>
+
+</div>
+
+</section>
+
+
+
+<!-- COMMON OVERLAY -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+
+
+<!-- ================= NODAL INFORMATION ================= -->
+
+<div class="modal" id="nodalInfoModal" style="display:none;">
+
+<h2>Nodal Information</h2>
+
+<form id="nodalForm">
+
+<div class="form-grid">
+
+<button type="button" class="view-all-btn" onclick="openviewNodalModal()">View All</button>
+
+<input id="nodalName" placeholder="Nodal Name">
+<input id="hostelName" placeholder="Hostel Name">
+<input id="block" placeholder="Block">
+<input id="totalSeat" placeholder="Total Seat">
+
+
+
+<div style="display:flex; gap:10px; align-items:center;">
+<input type="file" id="excelFile" accept=".xlsx,.xls">
+<button type="button" id="importBtn" class="btn-secondary">Import</button>
+</div>
+
+</div>
+
+<div class="modal-actions">
+
+<button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+
+<button type="submit" class="btn-primary">Submit</button>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- ================= VIEW ALL NODAL MODAL ================= -->
+
+<div class="modal" id="viewNodalModal" style="display:none;">
+
+<h2>All Nodal Records</h2>
+
+<!-- Search Bar -->
+<input type="text" class="search-input" id="searchInput" placeholder="Search..." style="margin-bottom:10px; width:100%; padding:8px;" >
+
+<!-- Table -->
+<div class="table-wrapper">
+<table border="1" width="100%" id="nodalTable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Nodal Name</th>
+<th>Hostel Name</th>
+<th>Block</th>
+<th>Total Seat</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody></tbody>
+</table>
+</div>
+
+<!-- Actions -->
+<div style="margin-top:10px;">
+<button onclick="backToForm()" class="back-btn">⬅ Back</button>
+</div>
+
+</div>
+
+<!-- ================= NODAL VISIT ENTRY ================= -->
+
+<div class="modal" id="nodalVisitModal" style="display:none;">
+
+<h2>Nodal Hostel Visit Entry</h2>
+
+<form id="nodalVisitForm" enctype="multipart/form-data">
+
+    <div class="form-grid">
+    <button type="button" class="view-all-btn" onclick="openViewModal()">View All</button>
+
+<!-- 1. Nodal Name (Searchable Dropdown) -->
+<div class="dropdown-container">
+
+    <!-- Search Input -->
+    <input type="text" class="search-input" id="nodalSearch" placeholder="Search Nodal Name" onclick="loadNodalNames()" >
+
+    <!-- Dropdown List -->
+    <div id="nodalDropdown" class="dropdown-list"></div>
+
+</div>
+ 
+<!-- 2. Hostel Name -->
+<div class="dropdown-container">
+    <input type="text" id="hostelSearch" placeholder="Select Hostel Name" readonly>
+    <div id="hostelDropdown" class="dropdown-list"></div>
+</div>
+
+<input id="blockInput" class="filter-input" placeholder="Block" readonly>
+<input id="totalSeatInput" class="filter-input" placeholder="Total Seat" readonly>
+
+<!-- 5. Admitted Seat -->
+<input id="admittedSeat" class="filter-input" placeholder="Admitted Seat">
+
+<!-- 6. Month -->
+<select id="month" class="filter-input">
+<option value="">Month</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">November</option>
+<option value="12">December</option>
+</select>
+
+<!-- 7. Year -->
+<input id="year" placeholder="Year" class="filter-input">
+
+<input type="text" id="remark" placeholder="Remark">
+
+<!-- 8,9 PHOTO 1 + REMARK -->
+<div class="upload-group">
+
+    <!-- ONE CAMERA -->
+    <button type="button" class="btn-primary" onclick="openCamera()">Open Camera</button>
+    <video id="video" width="250" autoplay></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <!-- CAPTURE BUTTONS -->
+    <button type="button" class="btn-primary" onclick="capturePhoto(1)">Capture Photo 1</button>
+    <img id="preview1" width="120">
+	<span id="headcount1" style="font-weight:bold; color:green; display:block; margin-top:5px;"></span>
+	<input type="text" id="remark1" placeholder="Photo 1 Remark">
+
+    <button type="button" class="btn-primary" onclick="capturePhoto(2)">Capture Photo 2</button>
+	<img id="preview2" width="120">
+	<span id="headcount2" style="font-weight:bold; color:green; display:block; margin-top:5px;"></span>
+	<input type="text" id="remark2" placeholder="Photo 2 Remark">
+
+</div>
+
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="modal-actions">
+
+<button type="button" onclick="closeModal()" class="btn-secondary">Cancel</button>
+
+<button type="submit" class="btn-primary">Submit</button>
+
+</div>
+
+</form>
+
+</div>
+<!-- ================= VIEW ALL MODAL ================= -->
+<div class="modal" id="viewModal" style="display:none;">
+
+    <!-- HEADER -->
+    <div style="display:flex; align-items:center; gap:10px;">
+        <button onclick="closeViewModal()" class="back-btn">⬅ Back</button>
+        
+    </div>
+    <h2>All Visit Data</h2>
+
+    <!-- FILTER -->
+    <div class="filter-bar">
+        <select id="filterMonth" class="filter-input">
+            <option value="">Month</option>
+            <option value="1">Jan</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">May</option>
+            <option value="6">Jun</option>
+            <option value="7">Jul</option>
+            <option value="8">Aug</option>
+            <option value="9">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+        </select>
+
+        <input type="year" id="filterYear" class="filter-input" placeholder="Year">
+
+        <button onclick="applyFilter()" class="filter-btn">Filter</button>
+    </div>
+
+    <!-- TABLE -->
+    <div id="viewTableSection" class="table-wrapper"></div>
+
+</div>
+
+<script>
+
+let activeModal = null;
+
+function openModal(id){
+closeModal();
+activeModal = document.getElementById(id);
+document.getElementById("modalOverlay").style.display="block";
+activeModal.style.display="block";
+}
+
+function closeModal(){
+document.getElementById("modalOverlay").style.display="none";
+if(activeModal){
+activeModal.style.display="none";
+activeModal=null;
+}
+}
+
+function toggleMenu(){
+document.getElementById("navMenu").classList.toggle("show");
+}
+
+</script>
+<script src="nodal.js"></script>
+</body>
+</html>

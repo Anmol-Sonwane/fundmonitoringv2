@@ -1,0 +1,104 @@
+    <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon" type="image/png" href="images/portal.png">
+  <title>Admin Panel — Fund Monitoring</title>
+  <link rel="stylesheet" href="adminstyles.css">
+</head>
+
+<body onload="renderUsers()">
+
+<!-- ================= HEADER (SAME AS INDEX) ================= -->
+<header class="header">
+  <div class="header-left">
+    <img src="images/Emblem_of_India.svg" alt="Govt Logo">
+    <div>
+      <h1>District Collector Office, Narayanpur</h1>
+      <p>Fund Monitoring Portal</p>
+    </div>
+  </div>
+
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+  <div class="header-right" id="navMenu">
+    <a href="index.html">Home</a>
+    <a class="active" href="adminpanel.html">Admin Panel</a>
+    <a href="#" class="login-btn" onclick="logout()">Logout</a>
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="admin-main">
+
+  <h2 class="page-title">Admin Panel</h2>
+
+  <!-- GRID -->
+  <div class="admin-grid">
+
+    <!-- CREATE USER -->
+    <section class="card">
+      <h3>Create User</h3>
+
+      <div class="form-grid single-col">
+        <input id="u_username" type="text" placeholder="Username">
+        <input id="u_password" type="password" placeholder="Password">
+
+        <select id="u_role">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+		  <option value="nodal">Nodal</option>
+		  <option value="student">Student</option>
+        </select>
+
+        <button class="btn-primary full-width" onclick="createUser()">
+          Create User
+        </button>
+      </div>
+
+      <p class="muted">
+        Users are saved securely via backend API.
+      </p>
+    </section>  
+
+    <!-- USER LIST -->
+    <section class="card">
+      <div class="card-header">
+        <h3>User List</h3>
+        <span class="muted">Total: <b id="userCount">0</b></span>
+      </div>
+
+      <div id="userListWrap" class="user-list"></div>
+    </section>
+
+    <!-- QUICK ACTIONS -->
+    <section class="card">
+      <h3>Quick Actions</h3>
+
+      <div class="action-row">
+        <button class="btn-secondary" onclick="seedSample()">
+          Seed Sample Users
+        </button>
+        <button class="btn-danger" onclick="clearUsers()">
+          Clear All Users
+        </button>
+      </div>
+
+      <p class="muted">
+        Useful for demo, testing, or resetting user data.
+      </p>
+    </section>
+
+  </div>
+</main>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navMenu').classList.toggle('show');
+  }
+</script>
+<script src="adminpanel.js"></script>
+
+</body>
+</html>
