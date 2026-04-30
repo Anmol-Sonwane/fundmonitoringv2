@@ -1,4 +1,9 @@
-const API_BASE = "https://localhost:7117/api/StudentInformation";
+const API_BASE = "/api/StudentInformation";
+const toAssetUrl = (path) => {
+    if (!path) return "";
+    const normalized = String(path);
+    return normalized.startsWith("/") ? normalized : `/${normalized}`;
+};
 
 function goBack() {
     document.getElementById("viewStudentModal").style.display = "none";
@@ -73,7 +78,7 @@ const orgNameDropdown = document.getElementById("orgName");
 // -------------------------------
 async function loadOrganizationTypes() {
     try {
-        const res = await fetch("https://localhost:7117/api/Information/OrganizationDropdown");
+        const res = await fetch("/api/Information/OrganizationDropdown");
         const data = await res.json();
 
         orgTypeDropdown.innerHTML = '<option value="">Select Organization Type</option>';
@@ -107,7 +112,7 @@ orgTypeDropdown.addEventListener("change", async () => {
 
     try {
         const res = await fetch(
-            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
+            `/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
         );
 
         const names = await res.json();
@@ -171,7 +176,7 @@ async function importStudents() {
 
 //----------------------------------
  
-const API = "https://localhost:7117/api/StudentInformation/GetAll";
+const API = "/api/StudentInformation/GetAll";
 const tableBody = document.querySelector("#viewStudentModal tbody");
 
 // ============================
@@ -197,7 +202,7 @@ async function loadStudents() {
                 <td contenteditable="false">${formatDate(student.dob)}</td>
 
                 <td>
-                    <img src="https://localhost:7117/${student.photo}" 
+                    <img src="${toAssetUrl(student.photo)}" 
                          width="50" height="50" 
                          style="border-radius:6px; object-fit:cover;" />
                 </td>
@@ -311,7 +316,7 @@ async function enableEdit(btn, id) {
 
     cells[6].innerHTML = `
         <div style="display:flex; flex-direction:column; gap:5px;">
-            <img src="https://localhost:7117/${photo}" 
+            <img src="${toAssetUrl(photo)}" 
                  width="50" height="50"
                  style="border-radius:6px; object-fit:cover;" />
             <input type="file" class="edit-photo" />
@@ -355,7 +360,7 @@ async function loadOrgTypesForEdit(row, selectedText, selectedName) {
 
     const typeSelect = row.querySelector(".edit-org-type");
 
-    const res = await fetch("https://localhost:7117/api/Information/OrganizationDropdown");
+    const res = await fetch("/api/Information/OrganizationDropdown");
     const data = await res.json();
 
     typeSelect.innerHTML = `<option value="">Select Type</option>`;
@@ -395,7 +400,7 @@ async function loadOrgNamesForEdit(row, selectedName = null) {
     if (!typeText) return;
 
     const res = await fetch(
-        `https://localhost:7117/api/Information/organization-names/by-type/${typeText}`
+        `/api/Information/organization-names/by-type/${typeText}`
     );
 
     const names = await res.json();
@@ -490,7 +495,7 @@ const filterName = document.getElementById("filterOrgName");
 //const tableBody = document.querySelector("#tableBody");
 
 async function loadOrganizationTypesFilter() {
-    const res = await fetch("https://localhost:7117/api/Information/OrganizationDropdown");
+    const res = await fetch("/api/Information/OrganizationDropdown");
     const data = await res.json();
 
     filterType.innerHTML = '<option value="">All Types</option>';
@@ -516,7 +521,7 @@ filterType.addEventListener("change", async () => {
 
     if (type) {
         const res = await fetch(
-            `https://localhost:7117/api/Information/organization-names/by-type/${type}`
+            `/api/Information/organization-names/by-type/${type}`
         );
 
         const names = await res.json();
@@ -601,7 +606,7 @@ const healthorgNameDropdown = document.getElementById("healthOrgName");
 // -------------------------------
 async function healthloadOrganizationTypes() {
     try {
-        const res = await fetch("https://localhost:7117/api/Information/OrganizationDropdown");
+        const res = await fetch("/api/Information/OrganizationDropdown");
         const data = await res.json();
 
         healthorgTypeDropdown.innerHTML = '<option value="">Select Organization Type</option>';
@@ -635,7 +640,7 @@ healthorgTypeDropdown.addEventListener("change", async () => {
 
     try {
         const res = await fetch(
-            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
+            `/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
         );
 
         const names = await res.json();
@@ -675,7 +680,7 @@ healthorgNameDropdown.addEventListener("change", async () => {
 
     try {
         const res = await fetch(
-            `https://localhost:7117/api/StudentInformation/GetStudentNames?orgType=${encodeURIComponent(orgType)}&orgName=${encodeURIComponent(orgName)}`
+            `/api/StudentInformation/GetStudentNames?orgType=${encodeURIComponent(orgType)}&orgName=${encodeURIComponent(orgName)}`
         );
 
         const students = await res.json();
@@ -714,7 +719,7 @@ studentInput.addEventListener("change", async () => {
 
     try {
         const res = await fetch(
-            `https://localhost:7117/api/StudentInformation/GetStudentDetails?orgType=${encodeURIComponent(orgType)}&orgName=${encodeURIComponent(orgName)}&studentName=${encodeURIComponent(studentName)}`
+            `/api/StudentInformation/GetStudentDetails?orgType=${encodeURIComponent(orgType)}&orgName=${encodeURIComponent(orgName)}&studentName=${encodeURIComponent(studentName)}`
         );
 
         if (!res.ok) {
@@ -826,7 +831,7 @@ document.querySelector("#studentHealthModal form")
         // Step 1: Get Student ID
         // -------------------------------
         const resStudent = await fetch(
-            `https://localhost:7117/api/StudentInformation/GetStudentByName?orgType=${encodeURIComponent(orgType)}&orgName=${encodeURIComponent(orgName)}&studentName=${encodeURIComponent(studentName)}`
+            `/api/StudentInformation/GetStudentByName?orgType=${encodeURIComponent(orgType)}&orgName=${encodeURIComponent(orgName)}&studentName=${encodeURIComponent(studentName)}`
         );
 
         if (!resStudent.ok) {
@@ -861,7 +866,7 @@ document.querySelector("#studentHealthModal form")
         // Step 3: Submit Health Data
         // -------------------------------
         const res = await fetch(
-            "https://localhost:7117/api/StudentHealth/Add",
+            "/api/StudentHealth/Add",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -915,7 +920,7 @@ async function loadHealthTable() {
     const tbody = document.getElementById("healthTableBody");
 
     try {
-        const res = await fetch("https://localhost:7117/api/StudentHealth/GetAll");
+        const res = await fetch("/api/StudentHealth/GetAll");
         const data = await res.json();
 
         tbody.innerHTML = "";
@@ -959,7 +964,7 @@ async function loadFilterDropdowns() {
     const nameDropdown = document.getElementById("viewHealthOrgName");
 
     // Load Org Types
-    const res = await fetch("https://localhost:7117/api/Information/OrganizationDropdown");
+    const res = await fetch("/api/Information/OrganizationDropdown");
     const data = await res.json();
 
     typeDropdown.innerHTML = '<option value="">All Types</option>';
@@ -979,7 +984,7 @@ async function loadFilterDropdowns() {
         if (!type) return;
 
         const res2 = await fetch(
-            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
+            `/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
         );
 
         const names = await res2.json();
@@ -1027,7 +1032,7 @@ async function deleteHealth(id) {
 
     try {
         const res = await fetch(
-            `https://localhost:7117/api/StudentHealth/Delete/${id}`,
+            `/api/StudentHealth/Delete/${id}`,
             { method: "DELETE" }
         );
 
@@ -1120,7 +1125,7 @@ async function updateHealth(id, btn) {
     };
 
     try {
-        const res = await fetch(`https://localhost:7117/api/StudentHealth/Update/${id}`, {
+        const res = await fetch(`/api/StudentHealth/Update/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -1149,7 +1154,7 @@ async function loadHealthTable() {
     const container = document.getElementById("studentTableSection");
 
     try {
-        const res = await fetch("https://localhost:7117/api/StudentHealth/GetAll");
+        const res = await fetch("/api/StudentHealth/GetAll");
         const data = await res.json();
 
         let table = `
@@ -1217,7 +1222,7 @@ async function loadHealthTabledas() {
     const container = document.getElementById("studentTableSection");
 
     try {
-        const res = await fetch("https://localhost:7117/api/StudentHealth/GetAll");
+        const res = await fetch("/api/StudentHealth/GetAll");
         const data = await res.json();
 
         healthData = data; 
@@ -1338,7 +1343,7 @@ function updateCount(data) {
 }
 async function loadStudentCount() {
     try {
-        const res = await fetch("https://localhost:7117/api/StudentInformation/GetCount");
+        const res = await fetch("/api/StudentInformation/GetCount");
         const data = await res.json();
 
         document.getElementById("totalStudentTable").innerText = data.totalStudents;

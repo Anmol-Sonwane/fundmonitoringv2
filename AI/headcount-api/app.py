@@ -7,6 +7,10 @@ app = FastAPI()
 
 model = YOLO("yolov8n.pt")
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 @app.post("/count")
 async def count_people(image: UploadFile = File(...)):
     contents = await image.read()

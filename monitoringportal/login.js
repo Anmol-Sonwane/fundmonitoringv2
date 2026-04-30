@@ -1,5 +1,5 @@
 // login.js
-const BASE_URL = "https://localhost:7117/api/Login/login";
+const BASE_URL = "/api/Login/login";
 
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("loginForm");

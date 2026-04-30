@@ -1,0 +1,78 @@
+services:
+  ai:
+    container_name: fundmonitoring-ai
+    build:
+      context: ./AI/headcount-api
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "5050"
+
+  mysql:
+    image: mysql:8.0
+    container_name: fundmonitoring-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-fundmonitoring_root_pwd}
+      MYSQL_DATABASE: fundmonitoringnew
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init/001-seed.sh:/docker-entrypoint-initdb.d/001-seed.sh:ro
+      - ./fundmonitoringnew_backup.sql:/docker-entrypoint-initdb.d/fundmonitoringnew_backup.sql:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+
+  api:
+    container_name: fundmonitoring-api
+    build:
+      context: ./fundmonitoring
+      dockerfile: fundmonitoring/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      ai:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      EnableHttpsRedirection: "false"
+      ConnectionStrings__DefaultConnection: server=mysql;port=3306;database=fundmonitoringnew;user=root;password=${MYSQL_ROOT_PASSWORD:-fundmonitoring_root_pwd};
+      HeadcountService__Url: http://ai:5050/count
+    volumes:
+      - api_uploads:/app/wwwroot/uploads
+    expose:
+      - "8080"
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: fundmonitoring-nginx
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "3002:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./monitoringportal:/usr/share/nginx/html:ro
+
+  adminer:
+    image: adminer:4
+    container_name: fundmonitoring-adminer
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
+  api_uploads:
