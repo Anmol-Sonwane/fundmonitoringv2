@@ -235,7 +235,6 @@ D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\scopedcss\
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\staticwebassets.build.json
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\staticwebassets.development.json
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\fundmoni.F2C026CE.Up2Date
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\fundmonitoring.dll
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\refint\fundmonitoring.dll
@@ -247,3 +246,5 @@ D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\rjimswa.ds
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\staticwebassets.build.json.cache
+D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\fundmonitoring.sourcelink.json
+D:\fundmonitoringnewV2\fundmonitoring\fundmonitoring\obj\Debug\net8.0\swae.build.ex.cache

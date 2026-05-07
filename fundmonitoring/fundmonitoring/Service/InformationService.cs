@@ -169,8 +169,8 @@ namespace fundmonitoring.Service
                 var block = worksheet.Cells[row, 3].Value?.ToString()?.Trim();
                 var superintendent = worksheet.Cells[row, 4].Value?.ToString()?.Trim();
                 var mobile = worksheet.Cells[row, 5].Value?.ToString()?.Trim();
-                var totalSeat = int.TryParse(worksheet.Cells[row, 4].Value?.ToString(), out int ts) ? ts : (int?)null;
-                var admittedSeat = int.TryParse(worksheet.Cells[row, 5].Value?.ToString(), out int asd) ? asd : (int?)null;
+                var totalSeat = int.TryParse(worksheet.Cells[row, 6].Value?.ToString(), out int ts) ? ts : (int?)null;
+                var admittedSeat = int.TryParse(worksheet.Cells[row, 7].Value?.ToString(), out int asd) ? asd : (int?)null;
                 var remark = worksheet.Cells[row, 8].Value?.ToString()?.Trim();
                 var remark2 = worksheet.Cells[row, 9].Value?.ToString()?.Trim();
 
