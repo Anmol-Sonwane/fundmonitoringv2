@@ -1,10 +1,5 @@
-const API_BASE = "/api";
+const API_BASE = "https://localhost:7117/api";
 const ORG_URL = `${API_BASE}/Organization`;
-const toAssetUrl = (path) => {
-    if (!path) return "";
-    const normalized = String(path);
-    return normalized.startsWith("/") ? normalized : `/${normalized}`;
-};
 
 // ================================
 // Initialize DOM Events
@@ -206,7 +201,7 @@ function loadOrganizationDropdown() {
     // Prevent duplicate loading
     if (!dropdown || dropdown.dataset.loaded === "true") return;
 
-    fetch("/api/Information/OrganizationDropdown")
+    fetch("https://localhost:7117/api/Information/OrganizationDropdown")
         .then(res => res.json())
         .then(data => {
 
@@ -259,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            fetch("/api/Information", {
+            fetch("https://localhost:7117/api/Information", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -390,7 +385,7 @@ function editInfoRow(id) {
 	 
 
     // Load options dynamically
-    fetch("/api/Information/OrganizationDropdown")
+    fetch("https://localhost:7117/api/Information/OrganizationDropdown")
         .then(res => res.json())
         .then(data => {
             orgSelect.innerHTML = `<option value="">Select Organization Type</option>`;
@@ -519,7 +514,7 @@ function filterInfoTable() {
     // -------------------------------
     // Load Organization Types
     // -------------------------------
-    fetch('/api/Information/OrganizationDropdown')
+    fetch('https://localhost:7117/api/Information/OrganizationDropdown')
         .then(res => res.json())
         .then(data => {
             orgTypeDropdown.innerHTML = '<option value="">Select Organization Type</option>';
@@ -542,7 +537,7 @@ function filterInfoTable() {
             return;
         }
 
-        fetch(`/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`)
+        fetch(`https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`)
             .then(res => res.json())
             .then(names => {
                 orgNameDropdown.innerHTML = '<option value="">Select Organization Name</option>';
@@ -585,29 +580,53 @@ monthlyForm.addEventListener("submit", async (e) => {
     formData.append("Total", totalInput.value);
     formData.append("Remark", remarkInput.value);
 	
+// Camera Images (1-5)
+for (let i = 1; i <= 5; i++) {
 
+    const remarkValue =
+        document.getElementById(`monthlyRemark${i}`)?.value ?? "";
 
-    // ✅ LOOP (BLOB BASED)
-		for (let i = 1; i <= 10; i++) {
+    formData.append(`Remark${i}`, remarkValue);
 
-		// remark
-		const remarkValue = document.getElementById(`monthlyRemark${i}`)?.value ?? "";
-		formData.append(`Remark${i}`, remarkValue);
+    if (monthlyPhotoBlobs[i]) {
+        formData.append(
+            `Photo${i}`,
+            monthlyPhotoBlobs[i],
+            `photo${i}.jpg`
+        );
+    }
 
-		// photo
-		if (monthlyPhotoBlobs[i]) {
-			formData.append(`Photo${i}`, monthlyPhotoBlobs[i], `photo${i}.jpg`);
-		}
+    if (monthlyHeadcounts && monthlyHeadcounts[i] != null) {
+        formData.append(`Headcount${i}`, monthlyHeadcounts[i]);
+    }
+}
 
-		// ✅ headcount (fixed)
-		if (monthlyHeadcounts && monthlyHeadcounts[i] != null) {
-			formData.append(`Headcount${i}`, monthlyHeadcounts[i]);
-		}
-	}
+// Upload Images (6-10)
+for (let i = 6; i <= 10; i++) {
+
+    const remarkValue =
+        document.getElementById(`monthlyRemark${i}`)?.value ?? "";
+
+    formData.append(`Remark${i}`, remarkValue);
+
+    const fileInput = document.getElementById(`monthlyFile${i}`);
+
+    if (fileInput && fileInput.files.length > 0) {
+        formData.append(
+            `Photo${i}`,
+            fileInput.files[0]
+        );
+    }
+
+    // Headcount
+    if (monthlyHeadcounts && monthlyHeadcounts[i] != null) {
+        formData.append(`Headcount${i}`, monthlyHeadcounts[i]);
+    }
+}
 
     try {
         const response = await fetch(
-            "/api/MonthlyCalculation/Add",
+            "https://localhost:7117/api/MonthlyCalculation/Add",
             {
                 method: "POST",
                 body: formData
@@ -650,7 +669,7 @@ async function openMonthlyViewAll() {
     tbody.innerHTML = "";
 
     try {
-        const res = await fetch("/api/MonthlyCalculation/GetAll");
+        const res = await fetch("https://localhost:7117/api/MonthlyCalculation/GetAll");
         const data = await res.json();
 data.forEach(record => {
 
@@ -663,7 +682,7 @@ for (let i = 1; i <= 10; i++) {
 const remarkText = record["remark" + i];
 
 if (photoPath) {
-    const fullUrl = toAssetUrl(photoPath);
+    const fullUrl = `https://localhost:7117/${photoPath}`;
     const headcount = record["headCount" + i]; // ✅ FIXED
 
     photoOptions += `
@@ -801,26 +820,61 @@ for (let i = 1; i <= 10; i++) {
     const existingPhoto = row.getAttribute(`data-photo${i}`) || "";
     const existingRemark = row.getAttribute(`data-remark${i}`) || "";
 
+    let imageControls = "";
+
+    if (i <= 5) {
+
+        imageControls = `
+            <button type="button"
+                    onclick="openEditMonthlyCamera(${i}, ${id})">
+                Open Camera
+            </button>
+
+            <video id="edit-video-${i}-${id}"
+                   width="150"
+                   autoplay
+                   style="display:none;">
+            </video>
+
+            <canvas id="edit-canvas-${i}-${id}"
+                    style="display:none;">
+            </canvas>
+
+            <button type="button"
+                    onclick="captureEditMonthlyPhoto(${i}, ${id})">
+                Capture
+            </button>
+
+            <img id="edit-preview-${i}-${id}"
+                 width="80"
+                 style="display:none;">
+        `;
+
+    } else {
+
+        imageControls = `
+            <input type="file"
+                   id="edit-file-${i}-${id}"
+                   accept="image/*">
+
+            <img id="edit-preview-${i}-${id}"
+                 width="80"
+                 style="display:none;">
+        `;
+    }
+
     photoEditorHTML += `
         <div style="margin-bottom:8px; border-bottom:1px solid #ddd; padding:6px;">
-            ${existingPhoto 
-                ? `<img src="${toAssetUrl(existingPhoto)}" width="60"><br>` 
+
+            ${existingPhoto
+                ? `<img src="https://localhost:7117/${existingPhoto}" width="60"><br>`
                 : ""}
-            <button type="button" onclick="openEditMonthlyCamera(${i}, ${id})">
-    Open Camera
-</button>
 
-<video id="edit-video-${i}-${id}" width="150" autoplay style="display:none;"></video>
-<canvas id="edit-canvas-${i}-${id}" style="display:none;"></canvas>
+            ${imageControls}
 
-<button type="button" onclick="captureEditMonthlyPhoto(${i}, ${id})">
-    Capture
-</button>
-
-<img id="edit-preview-${i}-${id}" width="80" style="display:none;">
-            <input type="text" 
-                   id="edit-remark-${i}-${id}" 
-                   value="${existingRemark}" 
+            <input type="text"
+                   id="edit-remark-${i}-${id}"
+                   value="${existingRemark}"
                    placeholder="Remark ${i}">
         </div>
     `;
@@ -837,7 +891,7 @@ const actionCell = row.children[11]; // action column
     // -------------------------
     const typeSelect = document.createElement("select");
     const types = await fetch(
-        "/api/Information/OrganizationDropdown"
+        "https://localhost:7117/api/Information/OrganizationDropdown"
     ).then(r => r.json());
 
     types.forEach(t => {
@@ -859,7 +913,7 @@ const actionCell = row.children[11]; // action column
     async function loadNames(type) {
         nameSelect.innerHTML = "";
         const names = await fetch(
-            `/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
+            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
         ).then(r => r.json());
 
         names.forEach(n => {
@@ -959,13 +1013,33 @@ for (let i = 1; i <= 10; i++) {
     const key = `${i}-${id}`;
 
     // ✅ PHOTO
+    if (i <= 5) {
+
     if (editMonthlyCapturedPhotos[key]) {
 
         const base64 = editMonthlyCapturedPhotos[key];
         const blob = await (await fetch(base64)).blob();
 
-        formData.append(`Photo${i}`, blob, `photo${i}.jpg`);
+        formData.append(
+            `Photo${i}`,
+            blob,
+            `photo${i}.jpg`
+        );
     }
+
+} else {
+
+    const fileInput =
+        document.getElementById(`edit-file-${i}-${id}`);
+
+    if (fileInput && fileInput.files.length > 0) {
+
+        formData.append(
+            `Photo${i}`,
+            fileInput.files[0]
+        );
+    }
+}
 
     // ✅ REMARK
     if (remarkInput) {
@@ -979,7 +1053,7 @@ for (let i = 1; i <= 10; i++) {
 }    
 
     try {
-        const res = await fetch("/api/MonthlyCalculation/Update", {
+        const res = await fetch("https://localhost:7117/api/MonthlyCalculation/Update", {
             method: "PUT",
             body: formData
         });
@@ -1007,7 +1081,7 @@ async function deleteRow(id) {
     if (!confirm("Delete this record?")) return;
 
     const res = await fetch(
-        `/api/MonthlyCalculation/Delete/${id}`,
+        `https://localhost:7117/api/MonthlyCalculation/Delete/${id}`,
         { method: "DELETE" }
     );
 
@@ -1046,7 +1120,7 @@ async function deleteMonthlyRow(id) {
 
     try {
         const res = await fetch(
-            `/api/MonthlyCalculation/Delete/${id}`,
+            `https://localhost:7117/api/MonthlyCalculation/Delete/${id}`,
             { method: "DELETE" }
         );
 
@@ -1175,7 +1249,7 @@ async function detectMonthlyHeadcount(blob, index) {
         const formData = new FormData();
         formData.append("image", blob, "photo.jpg");
 
-        const res = await fetch("/api/headcount", {
+        const res = await fetch("https://localhost:7117/api/headcount", {
             method: "POST",
             body: formData
         });
@@ -1317,7 +1391,7 @@ function captureEditMonthlyPhoto(index, rowId) {
             const formData = new FormData();
             formData.append("image", blob, "photo.jpg");
 
-            const res = await fetch("/api/headcount", {
+            const res = await fetch("https://localhost:7117/api/headcount", {
                 method: "POST",
                 body: formData
             });
@@ -1368,7 +1442,7 @@ let yearlyCapturedPhotos = {};
 let yearlyStream = null;
  
 
-const BASE_URL = "/api/Information";
+const BASE_URL = "https://localhost:7117/api/Information";
 
 // Bind Yearly Modal dropdowns dynamically
 function bindYearlyDropdowns() {
@@ -1464,22 +1538,60 @@ yearlyForm.addEventListener("submit", async (e) => {
     formData.append("Year", year);
     formData.append("Total", total);
 
-    // ✅ LOOP (BLOB BASED)
-    for (let i = 1; i <= 10; i++) {
+   // Camera Images (1-5)
+for (let i = 1; i <= 5; i++) {
 
-        // send remark always
-        const remarkValue = document.getElementById(`yearlyRemark${i}`)?.value ?? "";
-        formData.append(`Remark${i}`, remarkValue);
+    const remarkValue =
+        document.getElementById(`yearlyRemark${i}`)?.value ?? "";
 
-        // send blob directly
-        if (yearlyPhotoBlobs[i]) {
-            formData.append(`Photo${i}`, yearlyPhotoBlobs[i], `photo${i}.jpg`);
-        }
-		// ✅ ADD THIS
-if (window.yearlyHeadcounts && yearlyHeadcounts[i] != null) {
-    formData.append(`HeadCount${i}`, yearlyHeadcounts[i]);
-}
+    formData.append(`Remark${i}`, remarkValue);
+
+    if (yearlyPhotoBlobs[i]) {
+        formData.append(
+            `Photo${i}`,
+            yearlyPhotoBlobs[i],
+            `photo${i}.jpg`
+        );
     }
+
+    if (window.yearlyHeadcounts &&
+        yearlyHeadcounts[i] != null) {
+
+        formData.append(
+            `HeadCount${i}`,
+            yearlyHeadcounts[i]
+        );
+    }
+}
+
+// Upload Images (6-10)
+for (let i = 6; i <= 10; i++) {
+
+    const remarkValue =
+        document.getElementById(`yearlyRemark${i}`)?.value ?? "";
+
+    formData.append(`Remark${i}`, remarkValue);
+
+    const fileInput =
+        document.getElementById(`yearlyFile${i}`);
+
+    if (fileInput && fileInput.files.length > 0) {
+
+        formData.append(
+            `Photo${i}`,
+            fileInput.files[0]
+        );
+    }
+
+    if (window.yearlyHeadcounts &&
+        yearlyHeadcounts[i] != null) {
+
+        formData.append(
+            `HeadCount${i}`,
+            yearlyHeadcounts[i]
+        );
+    }
+}
 
     // debug
     console.log("Submitting Yearly Record:");
@@ -1489,7 +1601,7 @@ if (window.yearlyHeadcounts && yearlyHeadcounts[i] != null) {
 
     try {
         const res = await fetch(
-            "/api/YearlyCalculation/add",
+            "https://localhost:7117/api/YearlyCalculation/add",
             {
                 method: "POST",
                 body: formData
@@ -1515,7 +1627,7 @@ if (window.yearlyHeadcounts && yearlyHeadcounts[i] != null) {
 });
 });
 
-const BASE_YEARLY_URL = "/api/YearlyCalculation";
+const BASE_YEARLY_URL = "https://localhost:7117/api/YearlyCalculation";
 
 // Open Yearly View All Modal
 async function openYearlyViewAll() {
@@ -1529,7 +1641,7 @@ async function openYearlyViewAll() {
     tbody.innerHTML = "";
 
     try {
-        const res = await fetch("/api/YearlyCalculation/getall");
+        const res = await fetch("https://localhost:7117/api/YearlyCalculation/getall");
         const data = await res.json();
 
         data.forEach(record => {
@@ -1542,7 +1654,7 @@ for (let i = 1; i <= 10; i++) {
     const remarkText = record["remark" + i];
 
     if (photoPath) {
-        const fullUrl = toAssetUrl(photoPath);
+        const fullUrl = `https://localhost:7117/${photoPath}`;
        const headcount = record["headCount" + i]; // ✅ correct case
 
 photoOptions += `
@@ -1628,7 +1740,7 @@ async function deleteYearRow(yearSno) {
     if (!confirm("Are you sure you want to delete this record?")) return;
 
     try {
-        const res = await fetch(`/api/YearlyCalculation/delete/${yearSno}`, {
+        const res = await fetch(`https://localhost:7117/api/YearlyCalculation/delete/${yearSno}`, {
             method: "DELETE"
         });
 
@@ -1712,29 +1824,60 @@ for (let i = 1; i <= 10; i++) {
     const existingPhoto = row.getAttribute(`data-photo${i}`) || "";
     const existingRemark = row.getAttribute(`data-remark${i}`) || "";
 
+    let imageControls = "";
+
+    // Camera Images 1-5
+    if (i <= 5) {
+
+        imageControls = `
+            <button type="button"
+                    onclick="openYearEditCamera(${yearSno}, ${i})">
+                Open Camera
+            </button>
+
+            <video id="year-edit-video-${yearSno}-${i}"
+                   width="200"
+                   autoplay
+                   style="display:none;">
+            </video>
+
+            <button type="button"
+                    onclick="captureYearEditPhoto(${yearSno}, ${i})">
+                Capture
+            </button>
+
+            <img id="year-edit-preview-${yearSno}-${i}"
+                 width="120"
+                 style="display:none;">
+        `;
+
+    }
+    // Upload Images 6-10
+    else {
+
+        imageControls = `
+            <input type="file"
+                   id="year-edit-file-${yearSno}-${i}"
+                   accept="image/*">
+
+            <img id="year-edit-preview-${yearSno}-${i}"
+                 width="120"
+                 style="display:none;">
+        `;
+    }
+
     photoEditorHTML += `
         <div style="margin-bottom:8px; border-bottom:1px solid #ddd; padding:6px;">
-            ${existingPhoto 
-                ? `<img src="${toAssetUrl(existingPhoto)}" width="60"><br>` 
+
+            ${existingPhoto
+                ? `<img src="https://localhost:7117/${existingPhoto}" width="60"><br>`
                 : ""}
-            <button type="button" onclick="openYearEditCamera(${yearSno}, ${i})">
-    Open Camera
-</button>
 
-<video id="year-edit-video-${yearSno}-${i}" 
-       width="200" 
-       autoplay 
-       style="display:none;"></video>
+            ${imageControls}
 
-<button type="button" 
-        onclick="captureYearEditPhoto(${yearSno}, ${i})">
-    Capture
-</button>
-
-<img id="year-edit-preview-${yearSno}-${i}" width="120">
-            <input type="text" 
-                   id="year-edit-remark-${i}-${yearSno}" 
-                   value="${existingRemark}" 
+            <input type="text"
+                   id="year-edit-remark-${i}-${yearSno}"
+                   value="${existingRemark}"
                    placeholder="Remark ${i}">
         </div>
     `;
@@ -1776,25 +1919,39 @@ async function updateYearRow(yearSno) {
 
         const key = `${i}-${yearSno}`;
         const remarkInput = document.getElementById(`year-edit-remark-${i}-${yearSno}`);
-        const data = editYearlyCapturedPhotos[key];
+      if (i <= 5) {
 
-        if (data) {
+    const data = editYearlyCapturedPhotos[key];
 
-            const blob = await (await fetch(data.photo)).blob();
+    if (data) {
 
-            // ✅ send photo
-            formData.append(`Photo${i}`, blob, `photo${i}.jpg`);
+        const blob = await (await fetch(data.photo)).blob();
 
-            // ✅ metadata
-            formData.append(`Photo${i}Time`, data.time ?? "");
-            formData.append(`Photo${i}Latitude`, data.latitude ?? "");
-            formData.append(`Photo${i}Longitude`, data.longitude ?? "");
+        formData.append(`Photo${i}`, blob, `photo${i}.jpg`);
 
-            // ✅ OPTIONAL (only if you added detection in edit)
-            if (data.headcount != null) {
-                formData.append(`HeadCount${i}`, data.headcount);
-            }
+        formData.append(`Photo${i}Time`, data.time ?? "");
+        formData.append(`Photo${i}Latitude`, data.latitude ?? "");
+        formData.append(`Photo${i}Longitude`, data.longitude ?? "");
+
+        if (data.headcount != null) {
+            formData.append(`HeadCount${i}`, data.headcount);
         }
+    }
+
+}
+else {
+
+    const fileInput =
+        document.getElementById(`year-edit-file-${yearSno}-${i}`);
+
+    if (fileInput && fileInput.files.length > 0) {
+
+        formData.append(
+            `Photo${i}`,
+            fileInput.files[0]
+        );
+    }
+}
 
         // ✅ always send remark
         if (remarkInput) {
@@ -1829,7 +1986,7 @@ async function populateOrgDropdowns(yearSno, currentType, currentName) {
     const nameSelect = document.getElementById(`name-input-${yearSno}`);
 
     // Load Organization Types
-    const resTypes = await fetch("/api/Information/OrganizationDropdown");
+    const resTypes = await fetch("https://localhost:7117/api/Information/OrganizationDropdown");
     const typesData = await resTypes.json();
 
     typeSelect.innerHTML = '';
@@ -1857,7 +2014,7 @@ async function loadOrgNames(yearSno, orgType, selectedName) {
 
     if (!orgType) return;
 
-    const resNames = await fetch(`/api/Information/organization-names/by-type/${encodeURIComponent(orgType)}`);
+    const resNames = await fetch(`https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(orgType)}`);
     const namesData = await resNames.json();
 
     namesData.forEach(name => {
@@ -1989,7 +2146,7 @@ async function detectYearlyHeadcount(blob, index) {
         const formData = new FormData();
         formData.append("image", blob, "photo.jpg");
 
-        const res = await fetch("/api/headcount", {
+        const res = await fetch("https://localhost:7117/api/headcount", {
             method: "POST",
             body: formData
         });
@@ -2181,7 +2338,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ================================
     // LOAD ORGANIZATION TYPES
     // ================================
-    fetch('/api/Information/OrganizationDropdown')
+    fetch('https://localhost:7117/api/Information/OrganizationDropdown')
         .then(res => res.json())
         .then(data => {
             orgTypeDropdown.innerHTML = '<option value="">Select Organization Type</option>';
@@ -2214,7 +2371,7 @@ orgTypeDropdown.addEventListener("change", async () => {
     try {
 
         const response = await fetch(
-            `/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
+            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
         );
 
         if (!response.ok) throw new Error("Failed to fetch names");
@@ -2258,17 +2415,18 @@ orgTypeDropdown.addEventListener("change", async () => {
 
         // 🔥 Loop 10 Photos + Remarks
         // 🔥 Send 10 captured photos
-	for (let i = 1; i <= 10; i++) {
+// Camera Images (1-5)
+for (let i = 1; i <= 5; i++) {
 
-    // ✅ Always send remark (even if no photo)
-    const remarkValue = document.getElementById(`infraRemark${i}`)?.value ?? "";
+    const remarkValue =
+        document.getElementById(`infraRemark${i}`)?.value ?? "";
+
     formData.append(`Remark${i}`, remarkValue);
 
     if (infraCapturedPhotos[i]) {
 
         const base64 = infraCapturedPhotos[i].photo;
 
-        // 🔥 Convert base64 → Blob (VERY IMPORTANT)
         const blob = await (await fetch(base64)).blob();
 
         formData.append(`Photo${i}`, blob, `photo${i}.jpg`);
@@ -2278,10 +2436,30 @@ orgTypeDropdown.addEventListener("change", async () => {
     }
 }
 
+// Upload Images (6-10)
+for (let i = 6; i <= 10; i++) {
+
+    const remarkValue =
+        document.getElementById(`infraRemark${i}`)?.value ?? "";
+
+    formData.append(`Remark${i}`, remarkValue);
+
+    const fileInput =
+        document.getElementById(`infraFile${i}`);
+
+    if (fileInput && fileInput.files.length > 0) {
+
+        formData.append(
+            `Photo${i}`,
+            fileInput.files[0]
+        );
+    }
+}
+
         try {
 
             const response = await fetch(
-                "/api/MonthlyInfrastructure/Add",
+                "https://localhost:7117/api/MonthlyInfrastructure/Add",
                 {
                     method: "POST",
                     body: formData
@@ -2323,7 +2501,7 @@ async function openInfraViewAll() {
     tbody.innerHTML = "";
 
     try {
-        const res = await fetch("/api/MonthlyInfrastructure/GetAll");
+        const res = await fetch("https://localhost:7117/api/MonthlyInfrastructure/GetAll");
         const data = await res.json();
 
         data.forEach(record => {
@@ -2336,7 +2514,7 @@ async function openInfraViewAll() {
                 const remarkText = record["remark" + i];
 
                 if (photoPath) {
-                    const fullUrl = toAssetUrl(photoPath);
+                    const fullUrl = `https://localhost:7117/${photoPath}`;
                    photoOptions += `
     <option 
         value="${fullUrl}" 
@@ -2449,7 +2627,7 @@ async function deleteInfraRow(id) {
     try {
 
         const response = await fetch(
-            `/api/MonthlyInfrastructure/delete/${id}`,
+            `https://localhost:7117/api/MonthlyInfrastructure/delete/${id}`,
             {
                 method: "DELETE"
             }
@@ -2500,6 +2678,48 @@ for (let i = 1; i <= 10; i++) {
     const existingPhoto = row.getAttribute(`data-photo${i}`) || "";
     const existingRemark = row.getAttribute(`data-remark${i}`) || "";
 
+    let imageControls = "";
+
+    // Photo 1-5 Camera
+    if (i <= 5) {
+
+        imageControls = `
+            <button type="button"
+                    onclick="openInfraEditCamera(${id}, ${i})">
+                Open Camera
+            </button>
+
+            <video id="infra-edit-video-${id}-${i}"
+                   width="180"
+                   autoplay
+                   style="display:none; margin-top:5px;">
+            </video>
+
+            <button type="button"
+                    onclick="captureInfraEditPhoto(${id}, ${i})">
+                Capture
+            </button>
+
+            <img id="infra-edit-preview-${id}-${i}"
+                 width="70"
+                 style="display:none; margin-top:5px;">
+        `;
+
+    }
+    // Photo 6-10 Upload
+    else {
+
+        imageControls = `
+            <input type="file"
+                   id="infra-edit-file-${id}-${i}"
+                   accept="image/*">
+
+            <img id="infra-edit-preview-${id}-${i}"
+                 width="70"
+                 style="display:none; margin-top:5px;">
+        `;
+    }
+
     photoEditorHTML += `
         <div style="
             display:flex;
@@ -2508,12 +2728,11 @@ for (let i = 1; i <= 10; i++) {
             padding:12px 0;
             border-bottom:1px solid #ddd;
         ">
-            
-            <!-- Image Preview -->
+
             <div>
                 ${
                     existingPhoto
-                    ? `<img src="${toAssetUrl(existingPhoto)}" 
+                    ? `<img src="https://localhost:7117/${existingPhoto}"
                            style="width:70px;height:70px;
                                   object-fit:cover;
                                   border-radius:50%;
@@ -2534,27 +2753,9 @@ for (let i = 1; i <= 10; i++) {
                 }
             </div>
 
-            <!-- File + Remark -->
             <div style="flex:1;">
-                <button type="button" 
-        onclick="openInfraEditCamera(${id}, ${i})">
-    Open Camera
-</button>
 
-<video id="infra-edit-video-${id}-${i}" 
-       width="180" 
-       autoplay 
-       style="display:none; margin-top:5px;">
-</video>
-
-<button type="button" 
-        onclick="captureInfraEditPhoto(${id}, ${i})">
-    Capture
-</button>
-
-<img id="infra-edit-preview-${id}-${i}" 
-     width="70" 
-     style="display:block; margin-top:5px;">
+                ${imageControls}
 
                 <input type="text"
                        id="infra-edit-remark-${i}-${id}"
@@ -2581,7 +2782,7 @@ photoCell.innerHTML = photoEditorHTML;
     const typeSelect = document.createElement("select");
 
     const types = await fetch(
-        "/api/Information/OrganizationDropdown"
+        "https://localhost:7117/api/Information/OrganizationDropdown"
     ).then(r => r.json());
 
     types.forEach(t => {
@@ -2604,7 +2805,7 @@ photoCell.innerHTML = photoEditorHTML;
         nameSelect.innerHTML = "";
 
         const names = await fetch(
-            `/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
+            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
         ).then(r => r.json());
 
         names.forEach(n => {
@@ -2663,6 +2864,8 @@ async function saveInfraRow(id) {
     const key = `${i}-${id}`;
     const remarkInput = document.getElementById(`infra-edit-remark-${i}-${id}`);
 
+   if (i <= 5) {
+
     if (editInfraCapturedPhotos[key]) {
 
         const base64 = editInfraCapturedPhotos[key].photo;
@@ -2674,6 +2877,21 @@ async function saveInfraRow(id) {
         formData.append(`Photo${i}Longitude`, editInfraCapturedPhotos[key].longitude);
     }
 
+}
+else {
+
+    const fileInput =
+        document.getElementById(`infra-edit-file-${id}-${i}`);
+
+    if (fileInput && fileInput.files.length > 0) {
+
+        formData.append(
+            `Photo${i}`,
+            fileInput.files[0]
+        );
+    }
+}
+
     if (remarkInput) {
         formData.append(`Remark${i}`, remarkInput.value.trim());
     }
@@ -2681,7 +2899,7 @@ async function saveInfraRow(id) {
     try {
 
         const res = await fetch(
-            "/api/MonthlyInfrastructure/Update",
+            "https://localhost:7117/api/MonthlyInfrastructure/Update",
             {
                 method: "PUT",
                 body: formData
