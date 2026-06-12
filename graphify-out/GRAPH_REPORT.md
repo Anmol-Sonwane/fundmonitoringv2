@@ -1,4 +1,4 @@
-# Graph Report - fundmonitoringv2  (2026-04-30)
+# Graph Report - fundmonitoringv2  (2026-05-21)
 
 ## Corpus Check
 - 86 files · ~1,975,833 words

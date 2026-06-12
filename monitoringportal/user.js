@@ -1,4 +1,4 @@
-const API_BASE = "https://localhost:7117/api";
+const API_BASE = "/api";
 const ORG_URL = `${API_BASE}/Organization`;
 
 // ================================
@@ -201,7 +201,7 @@ function loadOrganizationDropdown() {
     // Prevent duplicate loading
     if (!dropdown || dropdown.dataset.loaded === "true") return;
 
-    fetch("https://localhost:7117/api/Information/OrganizationDropdown")
+    fetch(`${API_BASE}/Information/OrganizationDropdown`)
         .then(res => res.json())
         .then(data => {
 
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            fetch("https://localhost:7117/api/Information", {
+            fetch("/api/Information", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -385,7 +385,7 @@ function editInfoRow(id) {
 	 
 
     // Load options dynamically
-    fetch("https://localhost:7117/api/Information/OrganizationDropdown")
+    fetch("/api/Information/OrganizationDropdown")
         .then(res => res.json())
         .then(data => {
             orgSelect.innerHTML = `<option value="">Select Organization Type</option>`;
@@ -514,7 +514,7 @@ function filterInfoTable() {
     // -------------------------------
     // Load Organization Types
     // -------------------------------
-    fetch('https://localhost:7117/api/Information/OrganizationDropdown')
+    fetch('/api/Information/OrganizationDropdown')
         .then(res => res.json())
         .then(data => {
             orgTypeDropdown.innerHTML = '<option value="">Select Organization Type</option>';
@@ -537,7 +537,7 @@ function filterInfoTable() {
             return;
         }
 
-        fetch(`https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`)
+        fetch(`/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`)
             .then(res => res.json())
             .then(names => {
                 orgNameDropdown.innerHTML = '<option value="">Select Organization Name</option>';
@@ -626,7 +626,7 @@ for (let i = 6; i <= 10; i++) {
 
     try {
         const response = await fetch(
-            "https://localhost:7117/api/MonthlyCalculation/Add",
+            "/api/MonthlyCalculation/Add",
             {
                 method: "POST",
                 body: formData
@@ -669,7 +669,7 @@ async function openMonthlyViewAll() {
     tbody.innerHTML = "";
 
     try {
-        const res = await fetch("https://localhost:7117/api/MonthlyCalculation/GetAll");
+        const res = await fetch("/api/MonthlyCalculation/GetAll");
         const data = await res.json();
 data.forEach(record => {
 
@@ -682,7 +682,7 @@ for (let i = 1; i <= 10; i++) {
 const remarkText = record["remark" + i];
 
 if (photoPath) {
-    const fullUrl = `https://localhost:7117/${photoPath}`;
+    const fullUrl = `/${photoPath}`;
     const headcount = record["headCount" + i]; // ✅ FIXED
 
     photoOptions += `
@@ -867,7 +867,7 @@ for (let i = 1; i <= 10; i++) {
         <div style="margin-bottom:8px; border-bottom:1px solid #ddd; padding:6px;">
 
             ${existingPhoto
-                ? `<img src="https://localhost:7117/${existingPhoto}" width="60"><br>`
+                ? `<img src="/${existingPhoto}" width="60"><br>`
                 : ""}
 
             ${imageControls}
@@ -891,7 +891,7 @@ const actionCell = row.children[11]; // action column
     // -------------------------
     const typeSelect = document.createElement("select");
     const types = await fetch(
-        "https://localhost:7117/api/Information/OrganizationDropdown"
+        "/api/Information/OrganizationDropdown"
     ).then(r => r.json());
 
     types.forEach(t => {
@@ -913,7 +913,7 @@ const actionCell = row.children[11]; // action column
     async function loadNames(type) {
         nameSelect.innerHTML = "";
         const names = await fetch(
-            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
+            `/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
         ).then(r => r.json());
 
         names.forEach(n => {
@@ -1053,7 +1053,7 @@ for (let i = 1; i <= 10; i++) {
 }    
 
     try {
-        const res = await fetch("https://localhost:7117/api/MonthlyCalculation/Update", {
+        const res = await fetch("/api/MonthlyCalculation/Update", {
             method: "PUT",
             body: formData
         });
@@ -1081,7 +1081,7 @@ async function deleteRow(id) {
     if (!confirm("Delete this record?")) return;
 
     const res = await fetch(
-        `https://localhost:7117/api/MonthlyCalculation/Delete/${id}`,
+        `/api/MonthlyCalculation/Delete/${id}`,
         { method: "DELETE" }
     );
 
@@ -1120,7 +1120,7 @@ async function deleteMonthlyRow(id) {
 
     try {
         const res = await fetch(
-            `https://localhost:7117/api/MonthlyCalculation/Delete/${id}`,
+            `/api/MonthlyCalculation/Delete/${id}`,
             { method: "DELETE" }
         );
 
@@ -1249,7 +1249,7 @@ async function detectMonthlyHeadcount(blob, index) {
         const formData = new FormData();
         formData.append("image", blob, "photo.jpg");
 
-        const res = await fetch("https://localhost:7117/api/headcount", {
+        const res = await fetch("/api/headcount", {
             method: "POST",
             body: formData
         });
@@ -1391,7 +1391,7 @@ function captureEditMonthlyPhoto(index, rowId) {
             const formData = new FormData();
             formData.append("image", blob, "photo.jpg");
 
-            const res = await fetch("https://localhost:7117/api/headcount", {
+            const res = await fetch("/api/headcount", {
                 method: "POST",
                 body: formData
             });
@@ -1442,7 +1442,7 @@ let yearlyCapturedPhotos = {};
 let yearlyStream = null;
  
 
-const BASE_URL = "https://localhost:7117/api/Information";
+const BASE_URL = "/api/Information";
 
 // Bind Yearly Modal dropdowns dynamically
 function bindYearlyDropdowns() {
@@ -1601,7 +1601,7 @@ for (let i = 6; i <= 10; i++) {
 
     try {
         const res = await fetch(
-            "https://localhost:7117/api/YearlyCalculation/add",
+            "/api/YearlyCalculation/add",
             {
                 method: "POST",
                 body: formData
@@ -1627,7 +1627,7 @@ for (let i = 6; i <= 10; i++) {
 });
 });
 
-const BASE_YEARLY_URL = "https://localhost:7117/api/YearlyCalculation";
+const BASE_YEARLY_URL = "/api/YearlyCalculation";
 
 // Open Yearly View All Modal
 async function openYearlyViewAll() {
@@ -1641,7 +1641,7 @@ async function openYearlyViewAll() {
     tbody.innerHTML = "";
 
     try {
-        const res = await fetch("https://localhost:7117/api/YearlyCalculation/getall");
+        const res = await fetch("/api/YearlyCalculation/getall");
         const data = await res.json();
 
         data.forEach(record => {
@@ -1654,7 +1654,7 @@ for (let i = 1; i <= 10; i++) {
     const remarkText = record["remark" + i];
 
     if (photoPath) {
-        const fullUrl = `https://localhost:7117/${photoPath}`;
+        const fullUrl = `/${photoPath}`;
        const headcount = record["headCount" + i]; // ✅ correct case
 
 photoOptions += `
@@ -1740,7 +1740,7 @@ async function deleteYearRow(yearSno) {
     if (!confirm("Are you sure you want to delete this record?")) return;
 
     try {
-        const res = await fetch(`https://localhost:7117/api/YearlyCalculation/delete/${yearSno}`, {
+        const res = await fetch(`/api/YearlyCalculation/delete/${yearSno}`, {
             method: "DELETE"
         });
 
@@ -1870,7 +1870,7 @@ for (let i = 1; i <= 10; i++) {
         <div style="margin-bottom:8px; border-bottom:1px solid #ddd; padding:6px;">
 
             ${existingPhoto
-                ? `<img src="https://localhost:7117/${existingPhoto}" width="60"><br>`
+                ? `<img src="/${existingPhoto}" width="60"><br>`
                 : ""}
 
             ${imageControls}
@@ -1986,7 +1986,7 @@ async function populateOrgDropdowns(yearSno, currentType, currentName) {
     const nameSelect = document.getElementById(`name-input-${yearSno}`);
 
     // Load Organization Types
-    const resTypes = await fetch("https://localhost:7117/api/Information/OrganizationDropdown");
+    const resTypes = await fetch("/api/Information/OrganizationDropdown");
     const typesData = await resTypes.json();
 
     typeSelect.innerHTML = '';
@@ -2014,7 +2014,7 @@ async function loadOrgNames(yearSno, orgType, selectedName) {
 
     if (!orgType) return;
 
-    const resNames = await fetch(`https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(orgType)}`);
+    const resNames = await fetch(`/api/Information/organization-names/by-type/${encodeURIComponent(orgType)}`);
     const namesData = await resNames.json();
 
     namesData.forEach(name => {
@@ -2146,7 +2146,7 @@ async function detectYearlyHeadcount(blob, index) {
         const formData = new FormData();
         formData.append("image", blob, "photo.jpg");
 
-        const res = await fetch("https://localhost:7117/api/headcount", {
+        const res = await fetch("/api/headcount", {
             method: "POST",
             body: formData
         });
@@ -2338,7 +2338,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ================================
     // LOAD ORGANIZATION TYPES
     // ================================
-    fetch('https://localhost:7117/api/Information/OrganizationDropdown')
+    fetch('/api/Information/OrganizationDropdown')
         .then(res => res.json())
         .then(data => {
             orgTypeDropdown.innerHTML = '<option value="">Select Organization Type</option>';
@@ -2371,7 +2371,7 @@ orgTypeDropdown.addEventListener("change", async () => {
     try {
 
         const response = await fetch(
-            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
+            `/api/Information/organization-names/by-type/${encodeURIComponent(selectedType)}`
         );
 
         if (!response.ok) throw new Error("Failed to fetch names");
@@ -2459,7 +2459,7 @@ for (let i = 6; i <= 10; i++) {
         try {
 
             const response = await fetch(
-                "https://localhost:7117/api/MonthlyInfrastructure/Add",
+                "/api/MonthlyInfrastructure/Add",
                 {
                     method: "POST",
                     body: formData
@@ -2501,7 +2501,7 @@ async function openInfraViewAll() {
     tbody.innerHTML = "";
 
     try {
-        const res = await fetch("https://localhost:7117/api/MonthlyInfrastructure/GetAll");
+        const res = await fetch("/api/MonthlyInfrastructure/GetAll");
         const data = await res.json();
 
         data.forEach(record => {
@@ -2514,7 +2514,7 @@ async function openInfraViewAll() {
                 const remarkText = record["remark" + i];
 
                 if (photoPath) {
-                    const fullUrl = `https://localhost:7117/${photoPath}`;
+                    const fullUrl = `/${photoPath}`;
                    photoOptions += `
     <option 
         value="${fullUrl}" 
@@ -2627,7 +2627,7 @@ async function deleteInfraRow(id) {
     try {
 
         const response = await fetch(
-            `https://localhost:7117/api/MonthlyInfrastructure/delete/${id}`,
+            `/api/MonthlyInfrastructure/delete/${id}`,
             {
                 method: "DELETE"
             }
@@ -2732,7 +2732,7 @@ for (let i = 1; i <= 10; i++) {
             <div>
                 ${
                     existingPhoto
-                    ? `<img src="https://localhost:7117/${existingPhoto}"
+                    ? `<img src="/${existingPhoto}"
                            style="width:70px;height:70px;
                                   object-fit:cover;
                                   border-radius:50%;
@@ -2782,7 +2782,7 @@ photoCell.innerHTML = photoEditorHTML;
     const typeSelect = document.createElement("select");
 
     const types = await fetch(
-        "https://localhost:7117/api/Information/OrganizationDropdown"
+        "/api/Information/OrganizationDropdown"
     ).then(r => r.json());
 
     types.forEach(t => {
@@ -2805,7 +2805,7 @@ photoCell.innerHTML = photoEditorHTML;
         nameSelect.innerHTML = "";
 
         const names = await fetch(
-            `https://localhost:7117/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
+            `/api/Information/organization-names/by-type/${encodeURIComponent(type)}`
         ).then(r => r.json());
 
         names.forEach(n => {
@@ -2899,7 +2899,7 @@ else {
     try {
 
         const res = await fetch(
-            "https://localhost:7117/api/MonthlyInfrastructure/Update",
+            "/api/MonthlyInfrastructure/Update",
             {
                 method: "PUT",
                 body: formData
