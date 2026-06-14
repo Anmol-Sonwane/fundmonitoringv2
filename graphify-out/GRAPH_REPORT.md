@@ -1,11 +1,11 @@
 # Graph Report - fundmonitoringv2  (2026-06-14)
 
 ## Corpus Check
-- 88 files · ~1,977,361 words
+- 88 files · ~1,977,425 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 676 nodes · 769 edges · 67 communities detected
+- 677 nodes · 774 edges · 67 communities detected
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 40 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -95,18 +95,18 @@
   monitoringportal/calculation.js → monitoringportal/common.js
 - `closeViewAllModal()` --calls--> `openModal()`  [INFERRED]
   monitoringportal/user.js → monitoringportal/studentpanel.js
-- `viewPhoto()` --calls--> `resolvePhotoUrl()`  [INFERRED]
-  monitoringportal/user.js → monitoringportal/common.js
-- `editInfraRow()` --calls--> `resolvePhotoUrl()`  [INFERRED]
-  monitoringportal/user.js → monitoringportal/common.js
 - `editMonthlyRow()` --calls--> `resolvePhotoUrl()`  [INFERRED]
+  monitoringportal/user.js → monitoringportal/common.js
+- `editYearRow()` --calls--> `resolvePhotoUrl()`  [INFERRED]
+  monitoringportal/user.js → monitoringportal/common.js
+- `viewPhoto()` --calls--> `resolvePhotoUrl()`  [INFERRED]
   monitoringportal/user.js → monitoringportal/common.js
 
 ## Communities
 
 ### Community 0 - "Community 0"
 Cohesion: 0.04
-Nodes (31): openImageModal(), resolvePhotoUrl(), cancelInfraEdit(), cancelMonthlyEdit(), captureInfraEditPhoto(), captureYearEditPhoto(), deleteInfo(), editInfraRow() (+23 more)
+Nodes (32): openImageModal(), resolvePhotoUrl(), cancelInfraEdit(), cancelMonthlyEdit(), captureInfraEditPhoto(), captureYearEditPhoto(), deleteInfo(), editInfraRow() (+24 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.05
@@ -122,7 +122,7 @@ Nodes (22): applyFilter(), deleteHealth(), deleteStudent(), enableEdit(), filter
 
 ### Community 4 - "Community 4"
 Cohesion: 0.07
-Nodes (7): IInformation, fundmonitoring.Controllers, InformationController, fundmonitoring.Service, InformationService, fundmonitoring.Controllers, LoginController
+Nodes (7): IInformation, fundmonitoring.Controllers, InformationController, fundmonitoring.Service, InformationService, fundmonitoring.Controllers, StudentHealthController
 
 ### Community 5 - "Community 5"
 Cohesion: 0.09
