@@ -1,16 +1,6 @@
 const API_BASE = "/api";
 const ORG_URL = `${API_BASE}/Organization`;
 
-/** Normalize stored photo paths (/uploads/..., uploads/..., data:, http). */
-function resolvePhotoUrl(path) {
-    if (!path) return "";
-    const value = String(path).trim();
-    if (/^https?:\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:")) {
-        return value;
-    }
-    return "/" + value.replace(/^\/+/, "");
-}
-
 // ================================
 // Initialize DOM Events
 // ================================

@@ -1,10 +1,6 @@
 const BASE_URL = "/api/Nodel";
 const BASE = "/api/Nodelentry"; // change if needed
-const toAssetUrl = (path) => {
-    if (!path) return "";
-    const normalized = String(path);
-    return normalized.startsWith("/") ? normalized : `/${normalized}`;
-};
+const toAssetUrl = resolvePhotoUrl;
 
 // Form Submit Event
 document.getElementById("nodalForm").addEventListener("submit", async function (e) {

@@ -288,11 +288,12 @@ for (let i = 1; i <= 10; i++) {
 	
 
     if (photo) {
+        const photoUrl = resolvePhotoUrl(photo);
         photoDropdown += `
             <div class="photo-card">
-                <img src="${apiBase + photo}" 
+                <img src="${photoUrl}" 
      class="photo-thumb" 
-     onclick="openImageModal('${apiBase + photo}')"/>
+     onclick="openImageModal('${photoUrl.replace(/'/g, "\\'")}')"/>
                 <div class="photo-remark">${remark || "No Remark"}</div>
 				<div class="photo-headcount">👤 Headcount: ${headcount ?? 0}</div>
             </div>
@@ -348,11 +349,12 @@ for (let i = 1; i <= 10; i++) {
 	const headcount = item[`headCount${i}`];
 
     if (photo) {
+        const photoUrl = resolvePhotoUrl(photo);
         photoDropdown += `
             <div class="photo-card">
-                <img src="${apiBase + photo}" 
+                <img src="${photoUrl}" 
      class="photo-thumb" 
-     onclick="openImageModal('${apiBase + photo}')"/>
+     onclick="openImageModal('${photoUrl.replace(/'/g, "\\'")}')"/>
                 <div class="photo-remark">${remark || "No Remark"}</div>
 				<div class="photo-headcount">👤 Headcount: ${headcount ?? 0}</div>
             </div>
@@ -676,11 +678,12 @@ async function openInfraDetails(orgName) {
                     const remark = item[`remark${i}`];
 
                     if (photo) {
+                        const photoUrl = resolvePhotoUrl(photo);
                         photoDropdown += `
                             <div class="photo-card">
-                                <img src="${apiBase + photo}" 
-									class="photo-thumb" 
-									onclick="openImageModal('${apiBase + photo}')"/>
+                                <img src="${photoUrl}"
+									class="photo-thumb"
+									onclick="openImageModal('${photoUrl.replace(/'/g, "\\'")}')"/>
                                 <div class="photo-remark">${remark || "No Remark"}</div>
                             </div>
                         `;
@@ -726,7 +729,7 @@ function openImageModal(imageSrc) {
     const modal = document.getElementById("imagePreviewModal");
     const img = document.getElementById("previewImage");
 
-    img.src = imageSrc;
+    img.src = resolvePhotoUrl(imageSrc);
     modal.style.display = "flex";
 }
 

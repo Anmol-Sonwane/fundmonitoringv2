@@ -1,12 +1,12 @@
 # Graph Report - fundmonitoringv2  (2026-06-14)
 
 ## Corpus Check
-- 87 files · ~1,977,363 words
+- 88 files · ~1,977,361 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 677 nodes · 774 edges · 67 communities detected
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 35 edges (avg confidence: 0.8)
+- 676 nodes · 769 edges · 67 communities detected
+- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 40 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -91,30 +91,38 @@
 10. `InformationService` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `openImageModal()` --calls--> `resolvePhotoUrl()`  [INFERRED]
+  monitoringportal/calculation.js → monitoringportal/common.js
 - `closeViewAllModal()` --calls--> `openModal()`  [INFERRED]
   monitoringportal/user.js → monitoringportal/studentpanel.js
+- `viewPhoto()` --calls--> `resolvePhotoUrl()`  [INFERRED]
+  monitoringportal/user.js → monitoringportal/common.js
+- `editInfraRow()` --calls--> `resolvePhotoUrl()`  [INFERRED]
+  monitoringportal/user.js → monitoringportal/common.js
+- `editMonthlyRow()` --calls--> `resolvePhotoUrl()`  [INFERRED]
+  monitoringportal/user.js → monitoringportal/common.js
 
 ## Communities
 
 ### Community 0 - "Community 0"
 Cohesion: 0.04
-Nodes (30): cancelInfraEdit(), cancelMonthlyEdit(), captureInfraEditPhoto(), captureYearEditPhoto(), deleteInfo(), editInfraRow(), editMonthlyRow(), editYearRow() (+22 more)
+Nodes (31): openImageModal(), resolvePhotoUrl(), cancelInfraEdit(), cancelMonthlyEdit(), captureInfraEditPhoto(), captureYearEditPhoto(), deleteInfo(), editInfraRow() (+23 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.05
 Nodes (15): CalculationController, fundmonitoring.Controllers, CalculationService, fundmonitoring.Services, ControllerBase, HeadcountController, ICalculationService, fundmonitoring.Controllers (+7 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.08
-Nodes (25): applyBlockSeat(), applyFilter(), backToForm(), cancelEdit(), deleteRow(), editRow(), fetchVisitData(), fetchVisitDataForModal() (+17 more)
+Cohesion: 0.07
+Nodes (22): applyBlockSeat(), applyFilter(), backToForm(), cancelEdit(), deleteRow(), editRow(), fetchVisitData(), fetchVisitDataForModal() (+14 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.08
-Nodes (23): applyFilter(), deleteHealth(), deleteStudent(), enableEdit(), filterFit(), filterUnfit(), formatDateForInput(), loadFilterDropdowns() (+15 more)
+Nodes (22): applyFilter(), deleteHealth(), deleteStudent(), enableEdit(), filterFit(), filterUnfit(), formatDateForInput(), loadFilterDropdowns() (+14 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.07
-Nodes (7): IInformation, fundmonitoring.Controllers, InformationController, fundmonitoring.Service, InformationService, fundmonitoring.Controllers, StudentHealthController
+Nodes (7): IInformation, fundmonitoring.Controllers, InformationController, fundmonitoring.Service, InformationService, fundmonitoring.Controllers, LoginController
 
 ### Community 5 - "Community 5"
 Cohesion: 0.09
@@ -125,12 +133,12 @@ Cohesion: 0.09
 Nodes (5): IStudentInformation, fundmonitoring.Controllers, StudentInformationController, fundmonitoring.Services, StudentInformationService
 
 ### Community 7 - "Community 7"
-Cohesion: 0.12
-Nodes (17): backToOrgType(), closeMonthlyModal(), closeYearlyModal(), formatINR(), loadInfraOrgNames(), loadInfraSummary(), loadMonthlySummary(), loadOrgNameSummary() (+9 more)
-
-### Community 8 - "Community 8"
 Cohesion: 0.08
 Nodes (3): MonthlyCalculationController, fundmonitoring.Controllers, YearlyCalculationController
+
+### Community 8 - "Community 8"
+Cohesion: 0.13
+Nodes (17): backToOrgType(), closeMonthlyModal(), closeYearlyModal(), formatINR(), loadInfraOrgNames(), loadInfraSummary(), loadMonthlySummary(), loadOrgNameSummary() (+9 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.09
@@ -476,4 +484,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07 - nodes in this community are weakly interconnected._

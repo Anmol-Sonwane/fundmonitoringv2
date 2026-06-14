@@ -1,9 +1,5 @@
 const API_BASE = "/api/StudentInformation";
-const toAssetUrl = (path) => {
-    if (!path) return "";
-    const normalized = String(path);
-    return normalized.startsWith("/") ? normalized : `/${normalized}`;
-};
+const toAssetUrl = resolvePhotoUrl;
 
 function goBack() {
     document.getElementById("viewStudentModal").style.display = "none";
