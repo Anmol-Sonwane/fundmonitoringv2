@@ -1,6 +1,16 @@
 const API_BASE = "/api";
 const ORG_URL = `${API_BASE}/Organization`;
 
+/** Normalize stored photo paths (/uploads/..., uploads/..., data:, http). */
+function resolvePhotoUrl(path) {
+    if (!path) return "";
+    const value = String(path).trim();
+    if (/^https?:\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:")) {
+        return value;
+    }
+    return "/" + value.replace(/^\/+/, "");
+}
+
 // ================================
 // Initialize DOM Events
 // ================================
@@ -682,7 +692,7 @@ for (let i = 1; i <= 10; i++) {
 const remarkText = record["remark" + i];
 
 if (photoPath) {
-    const fullUrl = `/${photoPath}`;
+    const fullUrl = resolvePhotoUrl(photoPath);
     const headcount = record["headCount" + i]; // ✅ FIXED
 
     photoOptions += `
@@ -867,7 +877,7 @@ for (let i = 1; i <= 10; i++) {
         <div style="margin-bottom:8px; border-bottom:1px solid #ddd; padding:6px;">
 
             ${existingPhoto
-                ? `<img src="/${existingPhoto}" width="60"><br>`
+                ? `<img src="${resolvePhotoUrl(existingPhoto)}" width="60"><br>`
                 : ""}
 
             ${imageControls}
@@ -1654,7 +1664,7 @@ for (let i = 1; i <= 10; i++) {
     const remarkText = record["remark" + i];
 
     if (photoPath) {
-        const fullUrl = `/${photoPath}`;
+        const fullUrl = resolvePhotoUrl(photoPath);
        const headcount = record["headCount" + i]; // ✅ correct case
 
 photoOptions += `
@@ -1870,7 +1880,7 @@ for (let i = 1; i <= 10; i++) {
         <div style="margin-bottom:8px; border-bottom:1px solid #ddd; padding:6px;">
 
             ${existingPhoto
-                ? `<img src="/${existingPhoto}" width="60"><br>`
+                ? `<img src="${resolvePhotoUrl(existingPhoto)}" width="60"><br>`
                 : ""}
 
             ${imageControls}
@@ -2514,7 +2524,7 @@ async function openInfraViewAll() {
                 const remarkText = record["remark" + i];
 
                 if (photoPath) {
-                    const fullUrl = `/${photoPath}`;
+                    const fullUrl = resolvePhotoUrl(photoPath);
                    photoOptions += `
     <option 
         value="${fullUrl}" 
@@ -2577,7 +2587,7 @@ function viewPhoto(selectElement) {
 
     if (!selectedOption.value) return;
 
-    const photoUrl = selectedOption.value;
+    const photoUrl = resolvePhotoUrl(selectedOption.value);
     const remark = selectedOption.getAttribute("data-remark") || "";
 
     // Detect which modal is open
@@ -2732,7 +2742,7 @@ for (let i = 1; i <= 10; i++) {
             <div>
                 ${
                     existingPhoto
-                    ? `<img src="/${existingPhoto}"
+                    ? `<img src="${resolvePhotoUrl(existingPhoto)}"
                            style="width:70px;height:70px;
                                   object-fit:cover;
                                   border-radius:50%;

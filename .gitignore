@@ -22,3 +22,5 @@ Thumbs.db
 # DB snapshots (created by reset.sh — never commit production dumps)
 backups/snapshots/*.sql
 AI/headcount-api/.venv/
+scripts/.seed-venv/
+.local-dev.pids
